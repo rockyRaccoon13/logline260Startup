@@ -13,7 +13,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 Would you like to share your enthusiasm for a particular movie with your friends? Want to know that people are saying about the latest blockbuster? The *Logline* application allows you to read and publish short reviews on new and classic films. 
@@ -25,9 +25,22 @@ The startup has 5 pages:
 3. ViewProfile - this is where a user can view their own profile (from nav bar) or another user's profile (linked from a review)
 4. EditProfile - this is where a user can edit their own profile -- add a bio, name (maybe allow to change username?) 
 5. PublishReview - this is where a user can create a new review
-![Design image](placeholder.png)
+
+#### Design pages sketches
+1. Register/Login
+![Register and Login](specificationFiles/images/registerLoginDesign.jpeg)
+2. Reviews
+![Reviews](specificationFiles/images/reviewsDesign.jpeg)
+3. ViewProfile
+![Reviews](specificationFiles/images/viewProfileDesign.jpeg)
+4. EditProfile 
+![Reviews](specificationFiles/images/editProfileDesign.jpeg)
+5. PublishReview 
+![Reviews](specificationFiles/images/publishReviewDesign.jpeg)
 
 
+
+#### Design sequence diagram
 Here is a simple sequence diagram showing how a user interacts with my server to publish changes as well as view their and their friends' profiles/reviews:
 ```mermaid
 sequenceDiagram
