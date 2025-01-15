@@ -27,15 +27,19 @@ The startup has 5 pages:
 5. PublishReview - this is where a user can create a new review
 
 #### Design pages sketches
-1. Register/Login
+1. Register/Login  
 ![Register and Login](specificationFiles/images/registerLoginDesign.jpeg)
-2. Reviews
+
+2. Reviews  
 ![Reviews](specificationFiles/images/reviewsDesign.jpeg)
-3. ViewProfile
+
+3. ViewProfile  
 ![Reviews](specificationFiles/images/viewProfileDesign.jpeg)
-4. EditProfile 
+
+4. EditProfile   
 ![Reviews](specificationFiles/images/editProfileDesign.jpeg)
-5. PublishReview 
+
+5. PublishReview   
 ![Reviews](specificationFiles/images/publishReviewDesign.jpeg)
 
 
