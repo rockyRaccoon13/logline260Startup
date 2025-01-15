@@ -19,11 +19,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 Would you like to share your enthusiasm for a particular movie with your friends? Want to know that people are saying about the latest blockbuster? The *Logline* application allows you to read and publish short reviews on new and classic films. 
 
 ### Design
-
+The startup has 5 pages:
+1. Register/Login - regiser/login page. includes a random movie quote under startup logo
+2. Reviews - this is where the latest reviews are listed
+3. ViewProfile - this is where a user can view their own profile (from nav bar) or another user's profile (linked from a review)
+4. EditProfile - this is where a user can edit their own profile -- add a bio, name (maybe allow to change username?) 
+5. PublishReview - this is where a user can create a new review
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+Here is a simple sequence diagram showing how a user interacts with my server to publish changes as well as view their and their friends' profiles/reviews:
 ```mermaid
 sequenceDiagram
     box user browser
