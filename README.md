@@ -1,4 +1,4 @@
-# Your startup name here
+# ***Logline*** -- My cs260 Startup
 
 [My Notes](notes.md)
 
@@ -25,8 +25,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Would you like to share your enthusiasm for a particular movie with your friends? Want to know that people are saying about the latest blockbuster? The *Logline* application allows you to read and publish short reviews on new and classic films. 
 
 ### Design
 
