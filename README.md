@@ -26,9 +26,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    box user browser
+    actor user
+    end
+
+    box myApp
+    participant Server
+    end
+
+    box friends' browsers
+    actor friends
+    end
+
+    friends->>Server: publish review / edit profile
+    user->>Server: publish review / edit profile
+    Server->>user:  send recent reviews / profile    
 ```
 
 ### Key features
