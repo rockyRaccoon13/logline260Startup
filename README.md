@@ -46,12 +46,15 @@ I am going to use the required technologies in the following ways.
 - **HTML** - Uses correct HTML structure for application. Hyperlinks to navigate pages.
 - **CSS** - Application styling that looks good on different screen sizes, and uses good whitespace, coloring choices, and contrast.
 - **React** - Description here
-- **Service** - Backend service with endpoints for:
-    - login
-    - retrieving reviews/profiles
-    - submitting new reviews
-    - editing user profile
-- **DB/Login** - DB stores user profiles, reviews. Registering user adds them to DB which securely stores login credentials. User's can't publish review unless authenticated. 
+- **Service**
+    - Backend service with endpoints for:
+        - login
+        - retrieving reviews/profiles
+        - submitting new reviews
+        - editing user profile
+    - Third party service for getting random movie quote
+- **DB/Login** - DB stores user profiles, reviews. Registering user adds them to DB which securely stores login credentials. User's can't publish review unless authenticated.
+- 
 - **WebSocket** - User recieves alert when one of their reviews gets a like.
 
 ## 🚀 AWS deliverable
