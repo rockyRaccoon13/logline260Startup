@@ -54,7 +54,6 @@ I am going to use the required technologies in the following ways.
         - editing user profile
     - Third party service for getting random movie quote
 - **DB/Login** - DB stores user profiles, reviews. Registering user adds them to DB which securely stores login credentials. User's can't publish review unless authenticated.
-- 
 - **WebSocket** - User recieves alert when one of their reviews gets a like.
 
 ## 🚀 AWS deliverable
