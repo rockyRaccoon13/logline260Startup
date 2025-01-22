@@ -1,4 +1,4 @@
-# ***Logline*** -- My cs260 Startup
+# ***[Logline](https://startup.logline.click/)*** -- My cs260 Startup
 
 [My class notes](notes.md)
 
