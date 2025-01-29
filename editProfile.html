@@ -31,7 +31,38 @@
       <hr />
     </header>
 
-    <main></main>
+    <main>
+      <form id="edit-profile-form" action="/viewProfile.html" method="put">
+        <h2>
+          <label for="profile-first-name">First Name:</label>
+          <input type="text" id="profile-first-name" name="firstName" placeholder="optional"/>
+          <label for="profile-last-name">Last Name:</label>
+          <input type="text" id="profile-last-name" name="lastName" placeholder="optional"/>
+        </h2>
+
+        <h2 id="profile-username">Username: byuMascot</h2>
+        <h3>
+          <label for="profile-quote">Quote:</label>
+          <input type="text" id="profile-quote-input" name="profileQuote" placeholder="optional"/>
+        </h3>
+        <h3><date id="date-joined">Joined: 12/25/2002</date></h3>
+        <h3 id="profile-user-num-reviews">3 Reviews</h3>
+
+        <h3>Bio</h3>
+        <textarea
+          id="bio-text-input"
+          name="bioText"
+          rows="5"
+          cols="100"
+          maxlength="500"
+          placeholder="optional - 500 character limit"
+        ></textarea>
+        <br/>
+
+        <button type="submit">Submit Changes</button>
+       
+      </form>
+    </main>
 
     <footer>
       <hr />
