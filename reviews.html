@@ -6,90 +6,100 @@
     <title>Reviews</title>
   </head>
   <body>
-    <h1>Reviews</h1>
-    <hr />
-    <nav>
-      <menu>
-        <li>
-          <a href="/reviews.html">Reviews</a>
-        </li>
-        <li>
-          <a href="/reviews.html">User's profile</a>
-        </li>
-        <li>
-          <a href="/editProfile.html">Edit user's profile</a>
-        </li>
-        <li>
-          <a href="/publishReview.html">Publish new review</a>
-        </li>
-      </menu>
-    </nav>
+    <header>
+      <h1>Reviews</h1>
+      <hr />
+      <nav>
+        <menu>
+          <li>
+            <a href="/index.html">Login/Register</a>
+          </li>
+          <li>
+            <a href="/reviews.html">Reviews</a>
+          </li>
+          <li>
+            <a href="/reviews.html">User's profile</a>
+          </li>
+          <li>
+            <a href="/editProfile.html">Edit user's profile</a>
+          </li>
+          <li>
+            <a href="/publishReview.html">Publish new review</a>
+          </li>
+        </menu>
+      </nav>
+      <hr />
+    </header>
 
-    <hr />
-    <br/>
-
-    <div class="review-feed">
-
+    <main>
+      <div class="review-feed">
         <!-- Sample review entry for review page. Review data and -->
-      <div class="review-entry">
-        <div class="review-data">
-          <div class="review-movie-title">Movie Title</div>
-          <time class="review-watch-date">11/12/2024</time>
-          <div class="review-user">publisherUsername</div>
-          <div class="review-likes">
-            <span class="review-likes-emoji">❤️ </span>
-            <span class="review-likes-num">13</span>
+        <div class="review-entry">
+          <div class="review-data">
+            <div class="review-movie-title">Movie Title</div>
+            <time class="review-watch-date">11/12/2024</time>
+            <div class="review-user">publisherUsername</div>
+            <div class="review-likes">
+              <span class="review-likes-emoji">❤️ </span>
+              <span class="review-likes-num">13</span>
+            </div>
+          </div>
+          <br />
+          <div class="review-text">Short char limited review of the movie.</div>
+        </div>
+
+        <!-- end sample review. Sample repeats for showing layout.-->
+
+        <br />
+        <hr />
+
+        <div class="review-entry">
+          <div class="review-data">
+            <div class="review-movie-title">Movie Title</div>
+            <time class="review-watch-date">11/12/2024</time>
+            <div class="review-user">publisherUsername</div>
+            <div class="review-likes">
+              <span class="review-likes-emoji">❤️ </span>
+              <span class="review-likes-num">13</span>
+            </div>
+          </div>
+          <br />
+          <div class="review-text">
+            Review data and text comes from database. Num likes (clickable
+            heart) potentially update live and/or notify review publisher via
+            web socket."
           </div>
         </div>
-        <br/>
-        <div class="review-text">
-          Short char limited review of the movie.
-        </div>
-      </div>
 
-      <!-- end sample review. Sample repeats for showing layout.-->
-      
-      <br/> <hr/>
+        <br />
+        <hr />
 
-      
-
-      <div class="review-entry">
-        <div class="review-data">
-          <div class="review-movie-title">Movie Title</div>
-          <time class="review-watch-date">11/12/2024</time>
-          <div class="review-user">publisherUsername</div>
-          <div class="review-likes">
-            <span class="review-likes-emoji">❤️ </span>
-            <span class="review-likes-num">13</span>
+        <div class="review-entry">
+          <div class="review-data">
+            <div class="review-movie-title">Lion King</div>
+            <time class="review-watch-date">06/24/1994</time>
+            <div class="review-user">mufasa94</div>
+            <div class="review-likes">
+              <span class="review-likes-emoji">❤️ </span>
+              <span class="review-likes-num">300</span>
+            </div>
+          </div>
+          <br />
+          <div class="review-text">
+            Opening night! Basically Hamlet for babies. 10/10. Loved it
           </div>
         </div>
-        <br/>
-        <div class="review-text">
-          Review data and text comes from database. 
-          Num likes (clickable heart) potentially update live and/or notify review publisher via web socket."
-        </div>
+
+        <br />
+        <hr />
       </div>
+    </main>
 
-      <br/> <hr/>
-
-      <div class="review-entry">
-        <div class="review-data">
-          <div class="review-movie-title">Lion King</div>
-          <time class="review-watch-date">06/24/1994</time>
-          <div class="review-user">mufasa94</div>
-          <div class="review-likes">
-            <span class="review-likes-emoji">❤️ </span>
-            <span class="review-likes-num">300</span>
-          </div>
-        </div>
-        <br/>
-        <div class="review-text">
-          Opening night! Basically Hamlet for babies. 10/10. Loved it
-        </div>
-      </div>
-
-      <br/> <hr/>
-      
-    </div>
+    <footer>
+      <hr />
+      <span class="text-reset">Benson Rowley</span>
+      <br />
+      <a href="https://github.com/rockyRaccoon13/logline260Startup">GitHub</a>
+    </footer>
   </body>
 </html>
