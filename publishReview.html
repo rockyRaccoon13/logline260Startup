@@ -31,7 +31,48 @@
       <hr />
     </header>
 
-    <main></main>
+    <main>
+      <div class="user-instruction">All fields are required.</div>
+
+      <br />
+      <div class="review">
+        <form action="/reviews.html" method="get">
+          <div class="review-data">
+            <label for="review-movie-title-input">Movie Title: </label>
+            <input
+              type="text"
+              id="review-movie-title-input"
+              name="movieTitle"
+              required
+            />
+            <br />
+
+            <label for="review-watch-date-input">Date Watched: </label>
+            <input
+              type="date"
+              id="review-movie-title-input"
+              name="dateWatched"
+              required
+            />
+            <br />
+
+            <label for="review-text-input">Review: </label>
+            <br />
+            <textarea
+              id="review-text-input"
+              name="reviewText"
+              rows="4"
+              cols="50"
+              maxlength="300"
+              required
+            ></textarea>
+          </div>
+          <div class="user-instruction">300 character limit</div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
 
     <footer>
       <hr />
