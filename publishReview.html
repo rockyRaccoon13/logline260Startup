@@ -36,7 +36,7 @@
 
       <br />
       <div class="review">
-        <form action="/reviews.html" method="get">
+        <form action="/reviews.html" method="get"> <!--method should be put later-->
           <div class="review-data">
             <label for="review-movie-title-input">Movie Title: </label>
             <input
@@ -61,13 +61,14 @@
             <textarea
               id="review-text-input"
               name="reviewText"
-              rows="4"
+              rows="6"
               cols="50"
               maxlength="300"
               required
+
+              placeholder="300 character limit"
             ></textarea>
           </div>
-          <div class="user-instruction">300 character limit</div>
 
           <button type="submit">Submit</button>
         </form>
