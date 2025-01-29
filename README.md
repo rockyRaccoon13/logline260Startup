@@ -100,15 +100,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - index.html for login/register, publishReview.html to publish a new review, reviews.html to read reviews, viewProfile.html to view reviewers profile (including the user's own profile), editProfile.html to edit the user's own profile
+- [x] **Proper HTML element usage** - I did not complete this part of the deliverable.
+- [x] **Links** - Nav links between each page. Username of review links to view profile.
+- [x] **Text** - I did not complete this part of the deliverable.
+- [x] **3rd party API placeholder** - placeholder on index.html for movie quote API
+- [x] **Images** - FilmStrip image on index.html page and icon on each page.
+- [x] **Login placeholder** - Login/Register placeholder on index.html
+- [x] **DB data placeholder** - review data and profile data will be stored in DB.
+- [x] **WebSocket placeholder** - place holder in reviews.html for likes to update live and/or user to be notified when their review receives a like
 
 ## 🚀 CSS deliverable
 
