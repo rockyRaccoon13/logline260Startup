@@ -44,7 +44,7 @@
       <hr />
     </header>
 
-    <main>
+    <main class="container-fluid bg-secondary text-center">
       <img alt="filmStrip" src="/filmStrip.jpg" width="300" />
 
       <!--Insert quote from a web api-->
@@ -59,9 +59,10 @@
       <h2>Log In / Sign Up</h2>
       <p>In order to publish reviews you must be a registered user</p>
       <form method="get" action="browseReviews.html">
-        <div id="login-form-username">
-          <label for="userName">@:</label>
+        <div class="input-group mb-3" id="login-form-username">
+          <label class="input-group-text" for="userName">@:</label>
           <input
+            class="form-control"
             type="text"
             id="username"
             name="username"
@@ -70,9 +71,10 @@
             maxlength="20"
           />
         </div>
-        <div id="login-form-password">
-          <label for="password">🔒:</label>
+        <div class="input-group mb-3" id="login-form-password">
+          <label class="input-group-text" for="password">🔒:</label>
           <input
+            class="form-control"
             type="password"
             label="password"
             name="password"
@@ -82,8 +84,12 @@
           />
         </div>
         <div>password and username maxlength is 20 characters.</div>
-        <button type="submit" id="login-button">Login</button>
-        <button type="submit" id="register-button">Register</button>
+        <button class="btn btn-primary" type="submit" id="login-button">
+          Login
+        </button>
+        <button class="btn btn-secondary" type="submit" id="register-button">
+          Register
+        </button>
       </form>
     </main>
 
