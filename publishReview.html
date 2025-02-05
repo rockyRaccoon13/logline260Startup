@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,7 +37,9 @@
             <a class="nav-link" href="/editProfile.html">Edit user's profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/publishReview.html">Publish new review</a>
+            <a class="nav-link active" href="/publishReview.html"
+              >Publish new review</a
+            >
           </li>
         </menu>
       </nav>
@@ -48,11 +50,12 @@
       <div class="user-instruction">All fields are required.</div>
 
       <br />
-     
-        <form action="/reviews.html" method="get"> <!--method should be put later-->
-          <div class="review">
-            <div class="review-data">
-            <input 
+
+      <form action="/reviews.html" method="get">
+        <!--method should be put later-->
+        <div class="review">
+          <div class="review-data mb-3">
+            <input
               type="text"
               id="review-movie-title-input"
               name="movieTitle"
@@ -61,16 +64,15 @@
             />
             <br />
 
-          
             <input
               type="date"
               id="review-movie-title-input"
               name="dateWatched"
               required
             />
-            </div>
-            <br />
-            <div class="review-text">
+          </div>
+
+          <div class="review-text">
             <label for="review-text-input">Review: </label>
             <br />
             <textarea
@@ -80,15 +82,13 @@
               cols="50"
               maxlength="300"
               required
-
               placeholder="300 character limit"
             ></textarea>
           </div>
         </div>
 
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
-     
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </main>
 
     <footer class="fixed-bottom">
