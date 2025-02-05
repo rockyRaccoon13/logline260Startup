@@ -6,6 +6,7 @@ body {
 
 header {
   flex: 0 80px;
+  padding: 0;
 }
 
 main {
@@ -35,6 +36,7 @@ menu {
   /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
+  align-items: start;
 }
 
 .navbar-brand {

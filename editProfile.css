@@ -1,0 +1,15 @@
+.form {
+  width: 100%;
+  justify-items: center;
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+}
+
+#edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
