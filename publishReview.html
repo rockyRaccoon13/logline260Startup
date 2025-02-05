@@ -7,6 +7,9 @@
 
     <link rel="icon" href="/film-reel-icon.webp" />
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="review.css" />
+
+    <link rel="stylesheet" href="publishReview.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -45,27 +48,29 @@
       <div class="user-instruction">All fields are required.</div>
 
       <br />
-      <div class="review">
+     
         <form action="/reviews.html" method="get"> <!--method should be put later-->
-          <div class="review-data">
-            <label for="review-movie-title-input">Movie Title: </label>
-            <input
+          <div class="review">
+            <div class="review-data">
+            <input 
               type="text"
               id="review-movie-title-input"
               name="movieTitle"
+              placeholder="movie title"
               required
             />
             <br />
 
-            <label for="review-watch-date-input">Date Watched: </label>
+          
             <input
               type="date"
               id="review-movie-title-input"
               name="dateWatched"
               required
             />
+            </div>
             <br />
-
+            <div class="review-text">
             <label for="review-text-input">Review: </label>
             <br />
             <textarea
@@ -79,10 +84,11 @@
               placeholder="300 character limit"
             ></textarea>
           </div>
+        </div>
 
-          <button type="submit">Submit</button>
+          <button class="btn btn-primary" type="submit">Submit</button>
         </form>
-      </div>
+     
     </main>
 
     <footer class="fixed-bottom">
