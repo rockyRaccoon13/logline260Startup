@@ -1,0 +1,19 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  background-color: rgb(22, 25, 34);
+  border-radius: 12px;
+  margin: 0 1em 0 1em;
+}
+
+.profile-data {
+  margin-left: 20px;
+  flex: 1;
+}
+
+.profile-bio {
+  margin-left: 20px;
+  flex: 4;
+}

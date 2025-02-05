@@ -8,6 +8,8 @@
     <link rel="icon" href="/film-reel-icon.webp" />
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="review.css" />
+    <link rel="stylesheet" href="profile.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -43,31 +45,31 @@
           </li>
         </menu>
       </nav>
-      <hr />
     </header>
 
     <main>
-      <div id="profile">
-        <h2 id="proflie-firstLast">Name: Cosmo Cougar</h2>
-        <h2 id="profile-username">Username: byuMascot</h2>
-        <h3 id="profile-quote">Rise and Shout!</h3>
-        <h3><date id="date-joined">Joined: 12/25/2002</date></h3>
-        <h3 id="profile-user-num-reviews">3 Reviews</h3>
-
-        <h3>Bio</h3>
-        <p id="profile-bio">
-          BYU's number one film critic. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Phasellus egestas scelerisque urna, sed lacinia est
-          congue at. Cras gravida vehicula eros. Suspendisse ac blandit felis.
-          Integer neque neque, faucibus ac enim eu, tristique blandit lacus.
-          Curabitur non libero ac est porta pretium. Aenean a eleifend eros.
-        </p>
+      <div class="profile">
+        <div class="profile-data">
+          <h2 id="proflie-firstLast">Cosmo Cougar</h2>
+          <h2 id="profile-username">@byuMascot</h2>
+          <h3 id="profile-quote">Rise and Shout!</h3>
+          <h3><date id="date-joined">Joined: 12/25/2002</date></h3>
+          <h3 id="profile-user-num-reviews">2 Reviews</h3>
+        </div>
+        <div class="profile-bio">
+          <h3>Bio</h3>
+          <p class="profile-bio-text">
+            BYU's number one film critic. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Phasellus egestas scelerisque urna, sed
+            lacinia est congue at. Cras gravida vehicula eros. Suspendisse ac
+            blandit felis. Integer neque neque, faucibus ac enim eu, tristique
+            blandit lacus. Curabitur non libero ac est porta pretium. Aenean a
+            eleifend eros.
+          </p>
+        </div>
       </div>
 
-      <hr />
-      <hr />
-
-      <h3>Cosmo's Reviews</h3>
+      <h3>@byuMascot's Reviews</h3>
 
       <div class="review-list">
         <!-- Sample review entry for review page. Review data and -->
@@ -83,14 +85,10 @@
               <span class="review-likes-num">13</span>
             </div>
           </div>
-          <br />
           <div class="review-text">Short char limited review of the movie.</div>
         </div>
 
         <!-- end sample review. Sample repeats for showing layout.-->
-
-        <br />
-        <hr />
 
         <div class="review">
           <div class="review-data">
@@ -104,16 +102,13 @@
               <span class="review-likes-num">13</span>
             </div>
           </div>
-          <br />
+
           <div class="review-text">
             Review data and text comes from database. Num likes (clickable
             heart) potentially update live and/or notify review publisher via
             web socket."
           </div>
         </div>
-
-        <br />
-        <hr />
       </div>
     </main>
 
