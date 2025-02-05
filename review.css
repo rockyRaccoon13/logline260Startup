@@ -1,0 +1,30 @@
+.review {
+  background-color: #3a3e51 !important;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0.5em;
+
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+
+  flex: 0 100px;
+}
+
+.review-data {
+  text-wrap: wrap;
+  border-right: solid rgb(182, 182, 182) thin;
+  padding-right: 1em;
+}
+
+.review-text {
+  margin-left: 1em;
+}
+
+.review-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+}
