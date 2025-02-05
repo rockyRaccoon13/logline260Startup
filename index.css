@@ -1,0 +1,22 @@
+#api-quote-text {
+  color: #8a8cff;
+}
+
+h2 {
+  border-bottom: solid rgb(182, 182, 182) thin;
+}
+
+img {
+  max-width: 400px;
+  height: auto;
+}
+
+@media (max-height: 500px) {
+  img {
+    display: none;
+  }
+
+  #api-quote-text {
+    display: none;
+  }
+}

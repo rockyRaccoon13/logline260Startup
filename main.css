@@ -20,6 +20,15 @@ footer {
   flex: 0 30px;
 }
 
+.description-text {
+  color: #edc95b;
+}
+
+h1,
+h2 {
+  color: #b7d2f3;
+}
+
 menu {
   flex: 1;
   display: flex;

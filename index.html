@@ -8,6 +8,7 @@
     <link rel="icon" href="/film-reel-icon.webp" />
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="index.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -44,21 +45,28 @@
       <hr />
     </header>
 
-    <main class="container-fluid bg-secondary text-center">
+    <main class="container-fluid text-center">
+      <h1>Welcome to Logline</h1>
+
       <img alt="filmStrip" src="/filmStrip.jpg" width="300" />
 
       <!--Insert quote from a web api-->
       <p id="api-quote-text">
         "random movie quote" - some person [pull quote from API]
       </p>
-      <p id="logline-desc">
-        Logline is a web app that allows users to log, share, and read short 1-2
-        line film reviews.
-      </p>
-      <hr />
+
+      <div id="welcome">
+        <p class="description-text">
+          Logline is a web app that allows users to log, share, and read short
+          1-2 line film reviews.
+        </p>
+      </div>
+
       <h2>Log In / Sign Up</h2>
-      <p>In order to publish reviews you must be a registered user</p>
-      <form method="get" action="browseReviews.html">
+      <p class="directions-text">
+        In order to publish reviews you must be a registered user
+      </p>
+      <form class="mb-3" method="get" action="browseReviews.html">
         <div class="input-group mb-3" id="login-form-username">
           <label class="input-group-text" for="userName">@:</label>
           <input
@@ -83,7 +91,9 @@
             maxlength="20"
           />
         </div>
-        <div>password and username maxlength is 20 characters.</div>
+        <div class="directions-text">
+          password and username maxlength is 20 characters.
+        </div>
         <button class="btn btn-primary" type="submit" id="login-button">
           Login
         </button>
