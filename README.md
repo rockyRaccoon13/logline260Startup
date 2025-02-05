@@ -1,9 +1,8 @@
-# ***[Logline](https://startup.logline.click/)*** -- My cs260 Startup
+# **_[Logline](https://startup.logline.click/)_** -- My cs260 Startup
 
 [My class notes](notes.md)
 
-***Logline*** is a web app that allows users to log, share, and read short 1-2 line film reviews. Users can read through the newest reviews as well as look back on their own previous reviews or their friend's.
-
+**_Logline_** is a web app that allows users to log, share, and read short 1-2 line film reviews. Users can read through the newest reviews as well as look back on their own previous reviews or their friend's.
 
 ## 🚀 Specification Deliverable
 
@@ -16,36 +15,40 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
-Would you like to share your enthusiasm for a particular movie with your friends? Want to know that people are saying about the latest blockbuster? The *Logline* application allows you to read and publish short reviews on new and classic films. 
+
+Would you like to share your enthusiasm for a particular movie with your friends? Want to know that people are saying about the latest blockbuster? The _Logline_ application allows you to read and publish short reviews on new and classic films.
 
 ### Design
+
 The startup has 5 pages:
+
 1. Register/Login - regiser/login page. includes a random movie quote under startup logo
 2. Reviews - this is where the latest reviews are listed
 3. ViewProfile - this is where a user can view their own profile (from nav bar) or another user's profile (linked from a review)
-4. EditProfile - this is where a user can edit their own profile -- add a bio, name (maybe allow to change username?) 
+4. EditProfile - this is where a user can edit their own profile -- add a bio, name (maybe allow to change username?)
 5. PublishReview - this is where a user can create a new review
 
 #### Design pages sketches
+
 1. Register/Login  
-![Register and Login](specificationFiles/images/registerLoginDesign.jpeg)
+   ![Register and Login](specificationFiles/images/registerLoginDesign.jpeg)
 
 2. Reviews  
-![Reviews](specificationFiles/images/reviewsDesign.jpeg)
+   ![Reviews](specificationFiles/images/reviewsDesign.jpeg)
 
 3. ViewProfile  
-![Reviews](specificationFiles/images/viewProfileDesign.jpeg)
+   ![Reviews](specificationFiles/images/viewProfileDesign.jpeg)
 
-4. EditProfile   
-![Reviews](specificationFiles/images/editProfileDesign.jpeg)
+4. EditProfile  
+   ![Reviews](specificationFiles/images/editProfileDesign.jpeg)
 
-5. PublishReview   
-![Reviews](specificationFiles/images/publishReviewDesign.jpeg)
-
-
+5. PublishReview  
+   ![Reviews](specificationFiles/images/publishReviewDesign.jpeg)
 
 #### Design sequence diagram
+
 Here is a simple sequence diagram showing how a user interacts with my server to publish changes as well as view their and their friends' profiles/reviews:
+
 ```mermaid
 sequenceDiagram
     box user browser
@@ -62,7 +65,7 @@ sequenceDiagram
 
     friends->>Server: publish review / edit profile
     user->>Server: publish review / edit profile
-    Server->>user:  send recent reviews / profile    
+    Server->>user:  send recent reviews / profile
 ```
 
 ### Key features
@@ -81,12 +84,12 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Application styling that looks good on different screen sizes, and uses good whitespace, coloring choices, and contrast.
 - **React** - Description here
 - **Service**
-    - Backend service with endpoints for:
-        - login
-        - retrieving reviews/profiles
-        - submitting new reviews
-        - editing user profile
-    - Third party service for getting random movie quote
+  - Backend service with endpoints for:
+    - login
+    - retrieving reviews/profiles
+    - submitting new reviews
+    - editing user profile
+  - Third party service for getting random movie quote
 - **DB/Login** - DB stores user profiles, reviews. Registering user adds them to DB which securely stores login credentials. User's can't publish review unless authenticated.
 - **WebSocket** - User receives an alert when one of their reviews gets a like.
 
@@ -114,12 +117,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - CSS for header footer and main is implemented main.css
+- [x] **Navigation elements** - navbar with navlinks - active page is highlighted
+- [x] **Responsive to window resizing** - used a lot of flex and some display changes on media (see main.css)
+- [x] **Application elements** - includes elements for application
+- [x] **Application text content** - includes application mock text
+- [x] **Application images** - includes images
 
 ## 🚀 React part 1: Routing deliverable
 
