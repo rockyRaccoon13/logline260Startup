@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../profile/profile.css";
 import "./editProfile.css";
 
-export default function EditProfile() {
+export function EditProfile() {
   return (
     <main>
       <h1>Edit Profile</h1>

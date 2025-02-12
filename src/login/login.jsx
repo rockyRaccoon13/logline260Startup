@@ -28,7 +28,7 @@ export function Login() {
       </p>
       <form className="mb-3" method="get" action="reviews.html">
         <div className="input-group mb-3" id="login-form-username">
-          <label className="input-group-text" for="userName">
+          <label className="input-group-text" htmlFor="userName">
             @:
           </label>
           <input
@@ -38,11 +38,11 @@ export function Login() {
             name="username"
             placeholder="username"
             required
-            maxlength="20"
+            maxLength="20"
           />
         </div>
         <div className="input-group mb-3" id="login-form-password">
-          <label className="input-group-text" for="password">
+          <label className="input-group-text" htmlFor="password">
             🔒:
           </label>
           <input
@@ -52,22 +52,28 @@ export function Login() {
             name="password"
             placeholder="password"
             required
-            maxlength="20"
+            maxLength="20"
           />
         </div>
         <div className="directions-text">
           password and username maxlength is 20 characters.
         </div>
-        <button className="btn btn-primary" type="submit" id="login-button">
-          Login
-        </button>
-        <button
-          className="btn btn-secondary"
-          type="submit"
-          id="register-button"
-        >
-          Register
-        </button>
+        <div className="d-flex justify-content-center">
+          <button
+            className="btn btn-primary me-2"
+            type="submit"
+            id="login-button"
+          >
+            Login
+          </button>
+          <button
+            className="btn btn-secondary"
+            type="submit"
+            id="register-button"
+          >
+            Register
+          </button>
+        </div>
       </form>
     </main>
   );
