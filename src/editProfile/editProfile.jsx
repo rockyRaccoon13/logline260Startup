@@ -7,7 +7,7 @@ export function EditProfile() {
   return (
     <main>
       <h1>Edit Profile</h1>
-      <form id="edit-profile-form" action="/viewProfile.html" method="put">
+      <form id="edit-profile-form" action="/viewProfile" method="put">
         <div class="profile">
           <div class="profile-data">
             <h2>

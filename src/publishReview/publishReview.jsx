@@ -11,7 +11,7 @@ export function PublishReview() {
 
       <br />
 
-      <form action="/reviews.html" method="get">
+      <form action="/reviews" method="get">
         {/* <!--method should be put later--> */}
         <div class="review">
           <div class="review-data mb-3">

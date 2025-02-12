@@ -38,7 +38,7 @@ export function UserProfile() {
             <div class="review-movie-title">Movie Title</div>
             <time class="review-watch-date">11/12/2024</time>
             <div class="review-user">
-              <a href="viewProfile.html">publisherUsername</a>
+              <a href="viewProfile">publisherUsername</a>
             </div>
             <div class="review-likes">
               <span class="review-likes-emoji">❤️ </span>
@@ -54,7 +54,7 @@ export function UserProfile() {
             <div class="review-movie-title">Movie Title</div>
             <time class="review-watch-date">11/12/2024</time>
             <div class="review-user">
-              <a href="viewProfile.html">publisherUsername</a>
+              <a href="viewProfile">publisherUsername</a>
             </div>
             <div class="review-likes">
               <span class="review-likes-emoji">❤️ </span>

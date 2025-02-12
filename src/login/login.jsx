@@ -26,7 +26,7 @@ export function Login() {
       <p className="directions-text">
         In order to publish reviews you must be a registered user
       </p>
-      <form className="mb-3" method="get" action="reviews.html">
+      <form className="mb-3" method="get" action="reviews">
         <div className="input-group mb-3" id="login-form-username">
           <label className="input-group-text" htmlFor="userName">
             @:

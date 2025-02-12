@@ -14,7 +14,7 @@ export function BrowseReviews() {
             <div class="review-movie-title">Movie Title</div>
             <time class="review-watch-date">11/12/2024</time>
             <div class="review-user">
-              <a href="viewProfile.html">publisherUsername</a>
+              <a href="viewProfile">publisherUsername</a>
 
               <div class="review-likes">
                 <span class="review-likes-emoji">❤️ </span>
@@ -33,7 +33,7 @@ export function BrowseReviews() {
             <div class="review-movie-title">Movie Title</div>
             <time class="review-watch-date">11/12/2024</time>
             <div class="review-user">
-              <a href="viewProfile.html">publisherUsername</a>
+              <a href="viewProfile">publisherUsername</a>
 
               <div class="review-likes">
                 <span class="review-likes-emoji">❤️ </span>
@@ -54,7 +54,7 @@ export function BrowseReviews() {
             <div class="review-movie-title">Lion King</div>
             <time class="review-watch-date">06/24/1994</time>
             <div class="review-user">
-              <a href="viewProfile.html">mufasa94</a>
+              <a href="viewProfile">mufasa94</a>
 
               <div class="review-likes">
                 <span class="review-likes-emoji">❤️ </span>
