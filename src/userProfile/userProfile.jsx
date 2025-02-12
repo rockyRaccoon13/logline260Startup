@@ -1,59 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[Username]'s Profile</title>
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../profile/profile.css";
+import "../review/review.css";
 
-    <link rel="icon" href="/film-reel-icon.webp" />
-
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="review.css" />
-    <link rel="stylesheet" href="profile.css" />
-
-    <!-- Include bootstrap CSS framework -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="bg-dark text-light">
-    <header class="container-fluid">
-      <nav class="navbar fixed-top navbar-dark">
-        <a class="navbar-brand" href="#">Logline</a>
-        <menu class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/index.html">Login/Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/reviews.html">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/viewProfile.html"
-              >User's profile</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/editProfile.html">Edit user's profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/publishReview.html"
-              >Publish new review</a
-            >
-          </li>
-        </menu>
-      </nav>
-    </header>
-
+export function UserProfile() {
+  return (
     <main>
       <div class="profile">
         <div class="profile-data">
-          <h2 id="proflie-firstLast">Cosmo Cougar</h2>
+          <h2 id="profile-firstLast">Cosmo Cougar</h2>
           <h2 class="profile-username">@byuMascot</h2>
           <h3 id="profile-quote">Rise and Shout!</h3>
-          <h3><date id="date-joined">Joined: 12/25/2002</date></h3>
+          <h3>
+            <date id="date-joined">Joined: 12/25/2002</date>
+          </h3>
           <h3 id="profile-user-num-reviews">2 Reviews</h3>
         </div>
         <div class="profile-bio">
@@ -72,7 +32,7 @@
       <h3 class="user-review-heading">@byuMascot's Reviews</h3>
 
       <div class="review-list">
-        <!-- Sample review entry for review page. Review data and -->
+        {/* <!-- Sample review entry for review page. Review data and --> */}
         <div class="review">
           <div class="review-data">
             <div class="review-movie-title">Movie Title</div>
@@ -88,8 +48,7 @@
           <div class="review-text">Short char limited review of the movie.</div>
         </div>
 
-        <!-- end sample review. Sample repeats for showing layout.-->
-
+        {/* <!-- end sample review. Sample repeats for showing layout.--> */}
         <div class="review">
           <div class="review-data">
             <div class="review-movie-title">Movie Title</div>
@@ -111,10 +70,5 @@
         </div>
       </div>
     </main>
-
-    <footer class="fixed-bottom">
-      <span class="text-reset">Benson Rowley</span>
-      <a href="https://github.com/rockyRaccoon13/logline260Startup">GitHub</a>
-    </footer>
-  </body>
-</html>
+  );
+}
