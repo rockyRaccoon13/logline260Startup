@@ -8,8 +8,8 @@ export function EditProfile() {
     <main>
       <h1>Edit Profile</h1>
       <form id="edit-profile-form" action="/viewProfile" method="put">
-        <div class="profile">
-          <div class="profile-data">
+        <div className="profile">
+          <div className="profile-data">
             <h2>
               <input
                 type="text"
@@ -41,7 +41,7 @@ export function EditProfile() {
             <h3 id="profile-user-num-reviews">3 Reviews</h3>
           </div>
 
-          <div class="profile-bio">
+          <div className="profile-bio">
             <h3>Bio</h3>
             <textarea
               id="bio-text-input"
@@ -52,7 +52,7 @@ export function EditProfile() {
             ></textarea>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit">
+        <button className="btn btn-primary" type="submit">
           Submit Changes
         </button>
       </form>
