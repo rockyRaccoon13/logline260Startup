@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../review/review.css";
 import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
-import { Review } from "../review/Review";
+import { ReviewObject } from "../review/ReviewObject";
 
 export function PublishReview({ userName }) {
   let movieTitle = "";
@@ -13,7 +13,7 @@ export function PublishReview({ userName }) {
   const navigate = useNavigate();
 
   const onPublishReview = (movieTitle, date, reviewText) => {
-    const newReview = new Review(movieTitle, date, userName, reviewText);
+    const newReview = new ReviewObject(movieTitle, date, userName, reviewText);
     let allReviews = JSON.parse(localStorage.getItem("allReviews"));
     if (!allReviews) {
       allReviews = [];

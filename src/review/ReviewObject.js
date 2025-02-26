@@ -1,4 +1,4 @@
-export class Review {
+export class ReviewObject {
   constructor(movieTitle, date, username, text) {
     this.movieTitle = movieTitle;
     this.username = username;
