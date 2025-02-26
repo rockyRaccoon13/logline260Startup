@@ -81,9 +81,18 @@ export default function App() {
             }
           />
           <Route path="reviews" element={<BrowseReviews />} />
-          <Route path="viewProfile" element={<UserProfile />} />
-          <Route path="editProfile" element={<EditProfile />} />
-          <Route path="publishReview" element={<PublishReview />} />
+          <Route
+            path="viewProfile"
+            element={<UserProfile userName={userName} />}
+          />
+          <Route
+            path="editProfile"
+            element={<EditProfile userName={userName} />}
+          />
+          <Route
+            path="publishReview"
+            element={<PublishReview userName={userName} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
