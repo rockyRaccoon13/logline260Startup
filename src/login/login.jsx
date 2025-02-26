@@ -1,9 +1,32 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 import "./login.css";
 
-export function Login() {
+export function Login({ setAuthToken, setUserName }) {
+  const navigate = useNavigate();
+  let userName = null;
+  let password = null;
+
+  function setUserNameText(event) {
+    userName = event.target.value;
+  }
+
+  function setPassword(event) {
+    password = event.target.value;
+  }
+
+  function doAuthentication() {
+    if (userName && password) {
+      localStorage.setItem("authToken", "testToken");
+      localStorage.setItem("userName", userName);
+      setAuthToken("testToken");
+      setUserName(userName);
+      navigate("/reviews");
+    }
+  }
+
   return (
     <main className="container-fluid text-center">
       <h1>Welcome to Logline</h1>
@@ -26,7 +49,8 @@ export function Login() {
       <p className="directions-text">
         In order to publish reviews you must be a registered user
       </p>
-      <form className="mb-3" method="get" action="reviews">
+
+      <div className="mb-3" id="login-form">
         <div className="input-group mb-3" id="login-form-username">
           <label className="input-group-text" htmlFor="userName">
             @:
@@ -39,6 +63,7 @@ export function Login() {
             placeholder="username"
             required
             maxLength="20"
+            onChange={setUserNameText}
           />
         </div>
         <div className="input-group mb-3" id="login-form-password">
@@ -53,6 +78,7 @@ export function Login() {
             placeholder="password"
             required
             maxLength="20"
+            onChange={setPassword}
           />
         </div>
         <div className="directions-text">
@@ -63,6 +89,7 @@ export function Login() {
             className="btn btn-primary me-2"
             type="submit"
             id="login-button"
+            onClick={doAuthentication}
           >
             Login
           </button>
@@ -70,11 +97,12 @@ export function Login() {
             className="btn btn-secondary"
             type="submit"
             id="register-button"
+            onClick={doAuthentication}
           >
             Register
           </button>
         </div>
-      </form>
+      </div>
     </main>
   );
 }

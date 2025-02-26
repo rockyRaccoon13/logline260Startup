@@ -10,6 +10,13 @@ import { PublishReview } from "./publishReview/publishReview";
 import { Login } from "./login/login";
 
 export default function App() {
+  const [authToken, setAuthToken] = React.useState(
+    localStorage.getItem("authToken") || ""
+  );
+  const [userName, setUserName] = React.useState(
+    localStorage.getItem("userName") || ""
+  );
+
   return (
     <BrowserRouter>
       <div className="body bg-dark text-light">
@@ -22,33 +29,47 @@ export default function App() {
                   Login/Register
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="reviews">
-                  Reviews
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="viewProfile">
-                  User's profile
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="editProfile">
-                  Edit user's profile
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="publishReview">
-                  Publish new review
-                </NavLink>
-              </li>
+              {authToken && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="reviews">
+                    Reviews
+                  </NavLink>
+                </li>
+              )}
+
+              {authToken && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="publishReview">
+                    Publish review
+                  </NavLink>
+                </li>
+              )}
+              {/* {authToken && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="editProfile">
+                    Edit {userName}'s profile
+                  </NavLink>
+                </li>
+              )} */}
+              {authToken && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="viewProfile">
+                    {userName}'s profile
+                  </NavLink>
+                </li>
+              )}
             </menu>
           </nav>
           <hr />
         </header>
 
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <Login setAuthToken={setAuthToken} setUserName={setUserName} />
+            }
+          />
           <Route path="reviews" element={<BrowseReviews />} />
           <Route path="viewProfile" element={<UserProfile />} />
           <Route path="editProfile" element={<EditProfile />} />
