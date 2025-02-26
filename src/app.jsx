@@ -9,13 +9,17 @@ import { EditProfile } from "./editProfile/editProfile";
 import { PublishReview } from "./publishReview/publishReview";
 import { Login } from "./login/login";
 
+import { AuthState } from "./login/authState";
+
 export default function App() {
-  const [authToken, setAuthToken] = React.useState(
-    localStorage.getItem("authToken") || ""
-  );
   const [userName, setUserName] = React.useState(
-    localStorage.getItem("userName") || ""
+    localStorage.getItem("userName")
   );
+
+  const currentAuthState = userName
+    ? AuthState.Authenticated
+    : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
 
   return (
     <BrowserRouter>
@@ -29,7 +33,7 @@ export default function App() {
                   Login/Register
                 </NavLink>
               </li>
-              {authToken && (
+              {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="reviews">
                     Reviews
@@ -37,7 +41,7 @@ export default function App() {
                 </li>
               )}
 
-              {authToken && (
+              {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="publishReview">
                     Publish review
@@ -51,7 +55,7 @@ export default function App() {
                   </NavLink>
                 </li>
               )} */}
-              {authToken && (
+              {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="viewProfile">
                     {userName}'s profile
@@ -67,7 +71,13 @@ export default function App() {
           <Route
             path="/"
             element={
-              <Login setAuthToken={setAuthToken} setUserName={setUserName} />
+              <Login
+                userName={userName}
+                authState={authState}
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState), setUserName(userName);
+                }}
+              />
             }
           />
           <Route path="reviews" element={<BrowseReviews />} />
