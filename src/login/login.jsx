@@ -7,7 +7,7 @@ import { Unauthenticated } from "./unauthenticated";
 
 import "./login.css";
 
-export function Login({ userName, authState, onAuthChange }) {
+export function Login({ username, authState, onAuthChange }) {
   return (
     <main className="container-fluid text-center">
       <h1>Welcome to Logline</h1>
@@ -28,16 +28,16 @@ export function Login({ userName, authState, onAuthChange }) {
 
       {authState === AuthState.Authenticated && (
         <Authenticated
-          userName={userName}
-          onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)}
+          username={username}
+          onLogout={() => onAuthChange(username, AuthState.Unauthenticated)}
         />
       )}
 
       {authState === AuthState.Unauthenticated && (
         <Unauthenticated
-          userName={userName}
-          onLogin={(loginUserName) => {
-            onAuthChange(loginUserName, AuthState.Authenticated);
+          username={username}
+          onLogin={(loginUsername) => {
+            onAuthChange(loginUsername, AuthState.Authenticated);
           }}
         />
       )}

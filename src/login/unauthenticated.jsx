@@ -1,22 +1,83 @@
 import React from "react";
 
 import Button from "react-bootstrap/Button";
+import { User } from "../userProfile/UserObject";
 // import { MessageDialog } from "./messageDialog";
 
 export function Unauthenticated(props) {
-  const [userName, setUserName] = React.useState(props.userName);
+  const [username, setUsername] = React.useState(props.username);
   const [password, setPassword] = React.useState("");
   // const [displayError, setDisplayError] = React.useState(null);
 
   async function loginUser() {
-    localStorage.setItem("userName", userName);
-    props.onLogin(userName);
+    localStorage.getItem("users");
+    let allUsers = JSON.parse(localStorage.getItem("users"));
+
+    let user = allUsers.find((user) => user.username === username);
+    if (!user) {
+      console.log("login failed - username does not exist");
+      return;
+    }
+    if (user.password !== password) {
+      console.log("login failed - incorrect password");
+      return;
+    }
+
+    localStorage.setItem("username", username);
+    props.onLogin(username);
   }
 
-  async function createUser() {
-    localStorage.setItem("userName", userName);
-    props.onLogin(userName);
+  async function registerUser() {
+    // console.log("registering user... " + username);
+
+    //check username, password constraints
+    if (username === "null" || username === "undefined") {
+      console.log("register failed - username is null or undefined");
+      return;
+    }
+    if (username.includes(" ")) {
+      console.log("register failed - username contains spaces");
+      return;
+    }
+    if (password.includes(" ")) {
+      console.log("register failed - password contains spaces");
+      return;
+    }
+
+    //check if username already exists
+    let allUsers = JSON.parse(localStorage.getItem("users"));
+    console.log(allUsers);
+    if (!allUsers) {
+      allUsers = [];
+    }
+
+    let user = allUsers.find((user) => user.username === username);
+    if (user) {
+      console.log("register failed - username already exists");
+      return;
+    }
+
+    //create new user
+    let newUser = new User(username, password);
+    allUsers.push(newUser);
+    // console.log(newUser);
+
+    //register user
+    localStorage.setItem("users", JSON.stringify(allUsers));
+    localStorage.setItem("username", username);
+    props.onLogin(username);
   }
+
+  // async function createUser() {
+  //   localStorage.setItem("username", username);
+  //   let allUsers = JSON.parse(localStorage.getItem("users"));
+  //   if (!allUsers) {
+  //     allUsers = [];
+  //   }
+  //   allUsers.push(new User(username));
+  //   localStorage.setItem("users", JSON.stringify(allUsers));
+  //   props.onLogin(username);
+  // }
 
   return (
     <>
@@ -25,30 +86,31 @@ export function Unauthenticated(props) {
         In order to publish reviews you must be a registered user
       </p>
       <div className="mb-3" id="login-form">
-        <div className="input-group mb-3" id="login-form-username">
-          <label className="input-group-text" htmlFor="userName">
+        <div className="input-group mb-3">
+          <label className="input-group-text" htmlFor="auth-username-input">
             @:
           </label>
           <input
             className="form-control"
             type="text"
-            id="username"
+            id="auth-username-input"
             name="username"
             placeholder="username"
             required
             maxLength="20"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            autoComplete="on"
+            value={username || ""}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="input-group mb-3" id="login-form-password">
-          <label className="input-group-text" htmlFor="password">
+        <div className="input-group mb-3">
+          <label className="input-group-text" htmlFor="auth-password-input">
             🔒:
           </label>
           <input
             className="form-control"
             type="password"
-            label="password"
+            id="auth-password-input"
             name="password"
             placeholder="password"
             required
@@ -57,7 +119,7 @@ export function Unauthenticated(props) {
           />
         </div>
         <div className="directions-text">
-          password and username maxlength is 20 characters.
+          password and username maxlength is 20 characters, no spaces allowed.
         </div>
         <div className="d-flex justify-content-center">
           <button
@@ -65,7 +127,7 @@ export function Unauthenticated(props) {
             type="submit"
             id="login-button"
             onClick={() => loginUser()}
-            disabled={!userName || !password}
+            disabled={!username || !password}
           >
             Login
           </button>
@@ -73,8 +135,8 @@ export function Unauthenticated(props) {
             className="btn btn-secondary"
             type="submit"
             id="register-button"
-            onClick={() => createUser()}
-            disabled={!userName || !password}
+            onClick={() => registerUser()}
+            disabled={!username || !password}
           >
             Register
           </button>
@@ -91,8 +153,8 @@ export function Unauthenticated(props) {
 //       <input
 //         className="form-control"
 //         type="text"
-//         value={userName}
-//         onChange={(e) => setUserName(e.target.value)}
+//         value={username}
+//         onChange={(e) => setUsername(e.target.value)}
 //         placeholder="your@email.com"
 //       />
 //     </div>
@@ -108,14 +170,14 @@ export function Unauthenticated(props) {
 //     <Button
 //       variant="primary"
 //       onClick={() => loginUser()}
-//       disabled={!userName || !password}
+//       disabled={!username || !password}
 //     >
 //       Login
 //     </Button>
 //     <Button
 //       variant="secondary"
 //       onClick={() => createUser()}
-//       disabled={!userName || !password}
+//       disabled={!username || !password}
 //     >
 //       Create
 //     </Button>

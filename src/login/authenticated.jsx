@@ -7,7 +7,7 @@ export function Authenticated(props) {
   const navigate = useNavigate();
 
   function logout() {
-    localStorage.removeItem("userName");
+    localStorage.removeItem("username");
     props.onLogout();
   }
 
@@ -15,7 +15,9 @@ export function Authenticated(props) {
     <div
       style={{ textAlign: "center", display: "flex", flexDirection: "column" }}
     >
-      <h1 onClick={() => navigate("/viewProfile")}>Hello {props.userName}!</h1>
+      <h1 onClick={() => navigate(`/profile/${props.username}`)}>
+        Hello {props.username}!
+      </h1>
       <Button
         className="mb-1"
         variant="primary"

@@ -5,7 +5,7 @@ import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
 import { ReviewObject } from "../review/ReviewObject";
 
-export function PublishReview({ userName }) {
+export function PublishReview({ username }) {
   let movieTitle = "";
   let date = "";
   let reviewText = "";
@@ -13,7 +13,7 @@ export function PublishReview({ userName }) {
   const navigate = useNavigate();
 
   const onPublishReview = (movieTitle, date, reviewText) => {
-    const newReview = new ReviewObject(movieTitle, date, userName, reviewText);
+    const newReview = new ReviewObject(movieTitle, date, username, reviewText);
     let allReviews = JSON.parse(localStorage.getItem("allReviews"));
     if (!allReviews) {
       allReviews = [];
@@ -24,61 +24,68 @@ export function PublishReview({ userName }) {
   };
 
   return (
-    <main>
-      <h1>New Review</h1>
-      <div className="user-instruction">All fields are required.</div>
+    username && (
+      <main>
+        <h1>New Review</h1>
+        <div className="user-instruction">All fields are required.</div>
 
-      <br />
-      <div className="publish-review-form">
-        <div className="review">
-          <div className="review-data mb-3">
-            <input
-              type="text"
-              id="review-movie-title-input"
-              name="movieTitle"
-              placeholder="movie title"
-              required
-              onChange={(e) => (movieTitle = e.target.value)}
-            />
-            <br />
+        <br />
+        <div className="publish-review-form">
+          <div className="review">
+            <div className="review-data mb-3">
+              <input
+                type="text"
+                id="review-movie-title-input"
+                name="movieTitle"
+                placeholder="movie title"
+                required
+                onChange={(e) => (movieTitle = e.target.value)}
+              />
+              <br />
 
-            <input
-              type="date"
-              id="review-movie-title-input"
-              name="date"
-              required
-              onChange={(e) => (date = e.target.value)}
-            />
+              <input
+                type="date"
+                id="review-movie-title-input"
+                name="date"
+                required
+                onChange={(e) => (date = e.target.value)}
+              />
 
-            <div className="review-user">
-              <a href="viewProfile">@{userName}</a>
+              <div
+                className="review-username"
+                onClick={() => navigate(`/profile/${username}`)}
+              >
+                @{username}
+              </div>
+            </div>
+
+            <div className="review-text">
+              <label htmlFor="review-text-input">Review: </label>
+              <br />
+              <textarea
+                id="review-text-input"
+                name="reviewText"
+                rows="6"
+                cols="50"
+                maxLength="300"
+                required
+                placeholder="300 character limit"
+                onChange={(e) => (reviewText = e.target.value)}
+              ></textarea>
             </div>
           </div>
 
-          <div className="review-text">
-            <label htmlFor="review-text-input">Review: </label>
-            <br />
-            <textarea
-              id="review-text-input"
-              name="reviewText"
-              rows="6"
-              cols="50"
-              maxLength="300"
-              required
-              placeholder="300 character limit"
-              onChange={(e) => (reviewText = e.target.value)}
-            ></textarea>
-          </div>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            onClick={() => onPublishReview(movieTitle, date, reviewText)}
+          >
+            Publish
+          </button>
         </div>
-
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={() => onPublishReview(movieTitle, date, reviewText)}
-        >
-          Publish
-        </button>
-      </div>
-    </main>
+      </main>
+    )
   );
 }
+
+function PublishReviewForm({ username }) {}

@@ -22,6 +22,11 @@
   margin-left: 1em;
 }
 
+.review-username {
+  color: rgb(152, 217, 239);
+  text-decoration: underline;
+}
+
 .review-list {
   flex: 1;
   display: flex;

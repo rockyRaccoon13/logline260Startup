@@ -1,9 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { useNavigate } from "react-router-dom";
 import "./review.css";
 
 export function Review({ review }) {
+  const navigate = useNavigate();
   console.log(review);
   return (
     <div className="review">
@@ -12,8 +13,11 @@ export function Review({ review }) {
         <time className="review-watch-date" date={review.date}>
           {review.date}
         </time>
-        <div className="review-user">
-          <a href="viewProfile">@{review.username}</a>
+        <div
+          className="review-username"
+          onClick={() => navigate(`/profile/${review.username}`)}
+        >
+          @{review.username}
         </div>
         <div className="review-likes">
           <span className="review-likes-emoji">❤️ </span>
