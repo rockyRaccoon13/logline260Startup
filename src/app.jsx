@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 
-import { UserProfile } from "./userProfile/userProfile";
+import { UserProfile } from "./profile/viewProfile";
 import { BrowseReviews } from "./browseReviews/browseReviews";
-import { EditProfile } from "./editProfile/editProfile";
-import { PublishReview } from "./publishReview/publishReview";
+import { EditProfile } from "./profile/editProfile";
+import { PublishReview } from "./publish/publishReview";
 import { Login } from "./login/login";
 
 import { AuthState } from "./login/authState";

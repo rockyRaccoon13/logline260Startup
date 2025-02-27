@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../review/review.css";
 import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
-import { ReviewObject } from "../review/ReviewObject";
+import { ReviewObject } from "../dataObjects/ReviewObject";
 
 export function PublishReview({ username }) {
   let movieTitle = "";

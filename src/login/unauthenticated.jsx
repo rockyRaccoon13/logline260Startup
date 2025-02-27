@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "react-bootstrap/Button";
-import { User } from "../userProfile/UserObject";
+import { User } from "../dataObjects/UserObject";
 // import { MessageDialog } from "./messageDialog";
 
 export function Unauthenticated(props) {

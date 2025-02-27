@@ -21,3 +21,8 @@
 .user-review-heading {
   margin-top: 1em;
 }
+
+.profile-quote {
+  font-style: italic;
+  color: rgb(118, 215, 215);
+}
