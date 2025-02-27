@@ -5,7 +5,7 @@ import "./review.css";
 
 export function Review({ review }) {
   const navigate = useNavigate();
-  console.log(review);
+  // console.log(review);
   return (
     <div className="review">
       <div className="review-data">

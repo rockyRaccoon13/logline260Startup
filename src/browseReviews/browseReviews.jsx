@@ -10,7 +10,7 @@ export function BrowseReviews() {
     if (allReviewsText) {
       setReviews(JSON.parse(allReviewsText));
     }
-    console.log(reviews);
+    // console.log(reviews);
   }, []);
 
   return (
