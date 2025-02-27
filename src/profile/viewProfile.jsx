@@ -7,46 +7,20 @@ import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReviewList } from "../review/Review";
 
-function ProfileCard({ user, numReviews }) {
-  return (
-    <div className="profile">
-      <div className="profile-data">
-        <h2 className="profile-firstLast">
-          {user.data.first || user.data.last
-            ? `${user.data.first} ${user.data.last}`
-            : "Anonymous Movie Fan"}
-        </h2>
-        <h2 className="profile-username">@{user.username}</h2>
-        <h3 className="profile-quote">quote: {user.quote}</h3>
-        <h3>
-          <span className="date-joined">Joined: {user.data.joinDate}</span>
-        </h3>
-        <h3 className="profile-num-reviews">{numReviews} Reviews</h3>
-      </div>
-      <div className="profile-bio">
-        <h3>Bio</h3>
-        <p className="profile-bio-text">
-          {user.data.bio
-            ? user.data.bio
-            : "This user has not written a bio yet."}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export function UserProfile({ authUsername: curUsername }) {
   const { username: profileUsername } = useParams();
   const [userReviews, setUserReviews] = React.useState([]);
-  const [profileUser] = React.useState(
-    JSON.parse(localStorage.getItem("users")).find(
-      (u) => u.username === profileUsername
-    )
-  );
+  const [profileUser, setProfileUser] = React.useState(null);
 
   useEffect(() => {
     // fetch user data
-    console.log("userparam" + profileUsername);
+    // console.log("userparam" + profileUsername);
+
+    setProfileUser(
+      JSON.parse(localStorage.getItem("users")).find(
+        (u) => u.username === profileUsername
+      )
+    );
 
     if (profileUser) {
       const allReviews = JSON.parse(localStorage.getItem("allReviews"));
@@ -71,6 +45,35 @@ export function UserProfile({ authUsername: curUsername }) {
         <UserProfileNotFound />
       )}
     </main>
+  );
+}
+
+function ProfileCard({ user, numReviews }) {
+  // console.log("making card for user.. " + JSON.stringify(user));
+  return (
+    <div className="profile">
+      <div className="profile-data">
+        <h2 className="profile-firstLast">
+          {user.data.firstName || user.data.lastName
+            ? `${user.data.firstName} ${user.data.lastName}`
+            : "Anonymous Movie Fan"}
+        </h2>
+        <h2 className="profile-username">@{user.username}</h2>
+        <h3 className="profile-quote">{user.data.profileQuote}</h3>
+        <h3>
+          <span className="date-joined">Joined: {user.data.joinDate}</span>
+        </h3>
+        <h3 className="profile-num-reviews">{numReviews} Reviews</h3>
+      </div>
+      <div className="profile-bio">
+        <h3>Bio</h3>
+        <p className="profile-bio-text">
+          {user.data.bioText
+            ? user.data.bioText
+            : "This user has not written a bio yet."}
+        </p>
+      </div>
+    </div>
   );
 }
 
