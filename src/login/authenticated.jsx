@@ -28,7 +28,7 @@ export function Authenticated(props) {
       <Button
         className="mb-1"
         variant="primary"
-        onClick={() => navigate("/publishReview")}
+        onClick={() => navigate("/publish")}
       >
         Publish Review
       </Button>
