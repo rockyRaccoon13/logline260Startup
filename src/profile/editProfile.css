@@ -1,11 +1,16 @@
-.form {
+input {
   width: 100%;
-  justify-items: center;
+  background-color: inherit;
+  color: inherit;
+  border: 0.001em solid #c8a231;
 }
 
 textarea {
   resize: vertical;
   width: 100%;
+  background-color: inherit;
+  color: inherit;
+  border: 0.001em solid #c8a231;
 }
 
 #edit-profile-form {
