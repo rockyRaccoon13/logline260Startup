@@ -12,11 +12,11 @@ import { Login } from "./login/login";
 import { AuthState } from "./login/authState";
 
 export default function App() {
-  const [userName, setUserName] = React.useState(
-    localStorage.getItem("userName")
+  const [username, setUsername] = React.useState(
+    localStorage.getItem("username")
   );
 
-  const currentAuthState = userName
+  const currentAuthState = username
     ? AuthState.Authenticated
     : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
@@ -36,29 +36,22 @@ export default function App() {
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="reviews">
-                    Reviews
+                    Browse Reviews
                   </NavLink>
                 </li>
               )}
 
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="publishReview">
-                    Publish review
+                  <NavLink className="nav-link" to="publish">
+                    Publish Review
                   </NavLink>
                 </li>
               )}
-              {/* {authToken && (
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="editProfile">
-                    Edit {userName}'s profile
-                  </NavLink>
-                </li>
-              )} */}
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="viewProfile">
-                    {userName}'s profile
+                  <NavLink className="nav-link" to={`profile/${username}`}>
+                    {username}'s profile
                   </NavLink>
                 </li>
               )}
@@ -72,27 +65,35 @@ export default function App() {
             path="/"
             element={
               <Login
-                userName={userName}
+                username={username}
                 authState={authState}
-                onAuthChange={(userName, authState) => {
-                  setAuthState(authState), setUserName(userName);
+                onAuthChange={(username, authState) => {
+                  setAuthState(authState), setUsername(username);
                 }}
               />
             }
           />
+
+          <Route
+            path="publish"
+            element={requireAuth(
+              <PublishReview username={username} />,
+              authState
+            )}
+          />
           <Route path="reviews" element={<BrowseReviews />} />
           <Route
-            path="viewProfile"
-            element={<UserProfile userName={userName} />}
+            path="profile/:username"
+            element={<UserProfile authUsername={username} />}
           />
           <Route
-            path="editProfile"
-            element={<EditProfile userName={userName} />}
+            path="profile/:username/edit"
+            element={requireAuth(
+              <EditProfile authUsername={username} />,
+              authState
+            )}
           />
-          <Route
-            path="publishReview"
-            element={<PublishReview userName={userName} />}
-          />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
 
@@ -104,6 +105,18 @@ export default function App() {
         </footer>
       </div>
     </BrowserRouter>
+  );
+}
+
+function requireAuth(component, authState) {
+  return authState === AuthState.Authenticated ? component : <Unauthorized />;
+}
+
+function Unauthorized() {
+  return (
+    <main className="container-fluid  text-center">
+      405: Must be logged in to view this page.
+    </main>
   );
 }
 
