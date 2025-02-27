@@ -1,7 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../profile/profile.css";
 import "./editProfile.css";
+import "../profile/profile.css";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 export function EditProfile({ authUsername }) {
