@@ -5,3 +5,7 @@
   align-items: center;
   justify-content: start;
 }
+
+input {
+  margin: 0.25em;
+}
