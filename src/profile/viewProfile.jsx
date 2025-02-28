@@ -9,7 +9,6 @@ import { ReviewList } from "../review/Review";
 
 export function UserProfile({ authUsername: curUsername }) {
   const { username: profileUsername } = useParams();
-  const [userReviews, setUserReviews] = React.useState([]);
   const [profileUser, setProfileUser] = React.useState(null);
 
   useEffect(() => {
@@ -20,27 +19,10 @@ export function UserProfile({ authUsername: curUsername }) {
     setProfileUser(users.find((u) => u.username === profileUsername));
   }, [profileUsername]);
 
-  useEffect(() => {
-    if (profileUser) {
-      const allReviews = JSON.parse(localStorage.getItem("allReviews"));
-      if (allReviews) {
-        setUserReviews(
-          allReviews.filter(
-            (review) => review.username === profileUser.username
-          )
-        );
-      }
-    }
-  }, [profileUser]);
-
   return (
     <main>
       {profileUser ? (
-        <UserProfileFound
-          curUsername={curUsername}
-          profileUser={profileUser}
-          userReviews={userReviews}
-        />
+        <UserProfileFound curUsername={curUsername} profileUser={profileUser} />
       ) : (
         <UserProfileNotFound />
       )}
@@ -77,8 +59,37 @@ function ProfileCard({ user, numReviews }) {
   );
 }
 
-function UserProfileFound({ curUsername, profileUser, userReviews }) {
+function UserProfileFound({ curUsername, profileUser }) {
   const navigate = useNavigate();
+
+  const [userReviews, setUserReviews] = React.useState([]);
+
+  function fetchUserReviews(username) {
+    if (username) {
+      const allReviews = JSON.parse(localStorage.getItem("allReviews"));
+      if (allReviews) {
+        return allReviews.filter((review) => review.username === username);
+      }
+    }
+  }
+
+  useEffect(() => {
+    setUserReviews(fetchUserReviews(profileUser.username));
+  }, [profileUser]);
+
+  const doLikeReview = (reviewId) => {
+    if (!curUsername) {
+      return;
+    }
+    const allReviews = JSON.parse(localStorage.getItem("allReviews"));
+    const review = allReviews.find((r) => r.id === reviewId);
+    if (!review.likedBy.includes(curUsername)) {
+      review.likedBy.push(curUsername);
+    } else {
+      review.likedBy = review.likedBy.filter((u) => u !== curUsername);
+    }
+    localStorage.setItem("allReviews", JSON.stringify(allReviews));
+  };
 
   return (
     <>
@@ -103,7 +114,11 @@ function UserProfileFound({ curUsername, profileUser, userReviews }) {
           <h3 className="user-review-heading">
             @{profileUser.username}'s Reviews
           </h3>
-          <ReviewList reviews={userReviews} />
+          <ReviewList
+            username={curUsername}
+            reviews={userReviews}
+            doLikeReview={doLikeReview}
+          />
         </>
       )}
     </>
