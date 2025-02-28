@@ -59,7 +59,7 @@ export function PublishReview({ username }) {
             <div className="review-data mb-3">
               <input
                 type="text"
-                id="review-movie-title-input"
+                className="review-movie-title"
                 name="movieTitle"
                 placeholder="movie title"
                 required
@@ -69,7 +69,7 @@ export function PublishReview({ username }) {
 
               <input
                 type="date"
-                id="review-movie-title-input"
+                className="review-date"
                 name="date"
                 required
                 onChange={handleChange}
@@ -87,7 +87,6 @@ export function PublishReview({ username }) {
               <label htmlFor="review-text-input">Review: </label>
               <br />
               <textarea
-                id="review-text-input"
                 name="text"
                 rows="6"
                 cols="50"

@@ -12,6 +12,10 @@
   flex: 0 100px;
 }
 
+.review-movie-title {
+  font-style: italic;
+}
+
 .review-data {
   text-wrap: wrap;
   border-right: solid rgb(182, 182, 182) thin;
