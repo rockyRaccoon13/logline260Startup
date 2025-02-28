@@ -36,7 +36,7 @@ export default function App() {
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="reviews">
-                    Browse Reviews
+                    Browse
                   </NavLink>
                 </li>
               )}
@@ -44,14 +44,14 @@ export default function App() {
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="publish">
-                    Publish Review
+                    Publish
                   </NavLink>
                 </li>
               )}
               {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to={`profile/${username}`}>
-                    {username}'s profile
+                    {username}
                   </NavLink>
                 </li>
               )}
