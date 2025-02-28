@@ -22,7 +22,10 @@ export function Likes(props) {
     return (
       <div className="event">
         <span className={"like-event"}>
-          <span className="like-event-from">@{event.from} </span>
+          {"🔔" + " "}
+          <span className="like-event-from">
+            {event.from ? "@" + event.from : null}{" "}
+          </span>
           {event.type}
           <span className="like-event-value"> {event.value}</span>
         </span>
