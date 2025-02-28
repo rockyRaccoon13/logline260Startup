@@ -14,14 +14,13 @@ export function UserProfile({ authUsername: curUsername }) {
 
   useEffect(() => {
     // fetch user data
-    // console.log("userparam" + profileUsername);
 
-    setProfileUser(
-      JSON.parse(localStorage.getItem("users")).find(
-        (u) => u.username === profileUsername
-      )
-    );
+    const users = JSON.parse(localStorage.getItem("users"));
 
+    setProfileUser(users.find((u) => u.username === profileUsername));
+  }, [profileUsername]);
+
+  useEffect(() => {
     if (profileUser) {
       const allReviews = JSON.parse(localStorage.getItem("allReviews"));
       if (allReviews) {
@@ -32,7 +31,8 @@ export function UserProfile({ authUsername: curUsername }) {
         );
       }
     }
-  }, [profileUsername]);
+  }, [profileUser]);
+
   return (
     <main>
       {profileUser ? (
