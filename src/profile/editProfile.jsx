@@ -89,7 +89,7 @@ export function EditProfileForm({ username }) {
           <h3>
             <input
               type="text"
-              class="profile-quote"
+              className="profile-quote"
               name="profileQuote"
               placeholder="quote"
               value={formData.profileQuote}
