@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./login.css";
 import Button from "react-bootstrap/Button";
 import { User } from "../dataObjects/UserObject";
-// import { MessageDialog } from "./messageDialog";
+import { MessageDialog } from "./messageDialog";
 
 export function Unauthenticated(props) {
   const [username, setUsername] = React.useState(props.username);
   const [password, setPassword] = React.useState("");
-  // const [displayError, setDisplayError] = React.useState(null);
+  const [displayError, setDisplayError] = React.useState(null);
 
   async function loginUser() {
     localStorage.getItem("users");
@@ -17,11 +17,15 @@ export function Unauthenticated(props) {
 
     let user = allUsers.find((user) => user.username === username);
     if (!user) {
-      console.log("login failed - username does not exist");
+      // console.log("login failed - username does not exist");
+      setDisplayError(
+        "Username does not exist. Please check username or register new user"
+      );
       return;
     }
     if (user.password !== password) {
-      console.log("login failed - incorrect password");
+      // console.log("login failed - incorrect password");
+      setDisplayError("Invalid password");
       return;
     }
 
@@ -34,15 +38,18 @@ export function Unauthenticated(props) {
 
     //check username, password constraints
     if (username === "null" || username === "undefined") {
-      console.log("register failed - username is null or undefined");
+      // console.log("register failed - username is null or undefined");
+      setDisplayError("Username cannot contain be 'null' or 'undefined'");
       return;
     }
     if (username.includes(" ")) {
-      console.log("register failed - username contains spaces");
+      // console.log("register failed - username contains spaces");
+      setDisplayError("Username cannot contain spaces");
       return;
     }
     if (password.includes(" ")) {
-      console.log("register failed - password contains spaces");
+      // console.log("register failed - password contains spaces");
+      setDisplayError("Password cannot contain spaces");
       return;
     }
 
@@ -55,7 +62,8 @@ export function Unauthenticated(props) {
 
     let user = allUsers.find((user) => user.username === username);
     if (user) {
-      console.log("register failed - username already exists");
+      // console.log("register failed - username already exists");
+      setDisplayError("Username already exists");
       return;
     }
 
@@ -69,17 +77,6 @@ export function Unauthenticated(props) {
     localStorage.setItem("username", username);
     props.onLogin(username);
   }
-
-  // async function createUser() {
-  //   localStorage.setItem("username", username);
-  //   let allUsers = JSON.parse(localStorage.getItem("users"));
-  //   if (!allUsers) {
-  //     allUsers = [];
-  //   }
-  //   allUsers.push(new User(username));
-  //   localStorage.setItem("users", JSON.stringify(allUsers));
-  //   props.onLogin(username);
-  // }
 
   return (
     <>
@@ -144,46 +141,11 @@ export function Unauthenticated(props) {
           </button>
         </div>
       </div>
+
+      <MessageDialog
+        message={displayError}
+        onHide={() => setDisplayError(null)}
+      />
     </>
   );
 }
-
-// <>
-//   <div>
-//     <div className="input-group mb-3">
-//       <span className="input-group-text">@</span>
-//       <input
-//         className="form-control"
-//         type="text"
-//         value={username}
-//         onChange={(e) => setUsername(e.target.value)}
-//         placeholder="your@email.com"
-//       />
-//     </div>
-//     <div className="input-group mb-3">
-//       <span className="input-group-text">🔒</span>
-//       <input
-//         className="form-control"
-//         type="password"
-//         onChange={(e) => setPassword(e.target.value)}
-//         placeholder="password"
-//       />
-//     </div>
-//     <Button
-//       variant="primary"
-//       onClick={() => loginUser()}
-//       disabled={!username || !password}
-//     >
-//       Login
-//     </Button>
-//     <Button
-//       variant="secondary"
-//       onClick={() => createUser()}
-//       disabled={!username || !password}
-//     >
-//       Create
-//     </Button>
-//   </div>
-
-//   <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
-// </>;
