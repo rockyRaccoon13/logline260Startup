@@ -30,18 +30,20 @@ export function BrowseReviews({ username }) {
   };
 
   return (
-    <main>
+    <>
       {username && <Likes />}
-      <h1>Browse Reviews</h1>
-      {reviews.length === 0 ? (
-        <div>There are no reviews yet!</div>
-      ) : (
-        <ReviewList
-          username={username}
-          reviews={reviews}
-          doLikeReview={doLikeReview}
-        />
-      )}
-    </main>
+      <main>
+        <h1>Browse Reviews</h1>
+        {reviews.length === 0 ? (
+          <div>There are no reviews yet!</div>
+        ) : (
+          <ReviewList
+            username={username}
+            reviews={reviews}
+            doLikeReview={doLikeReview}
+          />
+        )}
+      </main>
+    </>
   );
 }
