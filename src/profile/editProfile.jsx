@@ -112,13 +112,22 @@ export function EditProfileForm({ username }) {
           ></textarea>
         </div>
       </div>
-      <button
-        className="btn btn-primary"
-        type="submit"
-        onClick={() => handleSubmit()}
-      >
-        Submit Changes
-      </button>
+      <div className="button-group mt-3">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={() => handleSubmit()}
+        >
+          Submit Changes
+        </button>
+        <button
+          className="btn btn-danger"
+          type="submit"
+          onClick={() => navigate(`/profile/${username}`)}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
