@@ -136,8 +136,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - Everything works locally except for user getting like notifications are mocked out (to implement with web socket). Service calls mocked out to use localStorage data but works for multiple users locally. Since everything is saved to local storage multiple users can login (at separate times of course) and view/edit/like reviews/profiles.
+
+Only the login and browse reviews pages are available to all users (however unauthorized users cannot like reviews). Everything else must be accessed by an authorized user.
+
+- [x] **Hooks** - Used hooks to render reviews, forms, profiles
 
 ## 🚀 Service deliverable
 
