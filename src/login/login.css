@@ -6,6 +6,10 @@ h2 {
   border-bottom: solid rgb(182, 182, 182) thin;
 }
 
+.form-control {
+  margin: 0;
+}
+
 img {
   max-width: 400px;
   height: auto;
