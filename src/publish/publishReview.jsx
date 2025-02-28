@@ -4,16 +4,31 @@ import "../review/review.css";
 import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
 import { ReviewObject } from "../dataObjects/ReviewObject";
+import { MessageDialog } from "../login/messageDialog";
 
 export function PublishReview({ username }) {
-  let movieTitle = "";
-  let date = "";
-  let reviewText = "";
+  const [displayError, setDisplayError] = React.useState(null);
+  const [reviewData, setReviewData] = React.useState({
+    movieTitle: "",
+    date: "",
+    text: "",
+  });
 
   const navigate = useNavigate();
 
-  const onPublishReview = (movieTitle, date, reviewText) => {
-    const newReview = new ReviewObject(movieTitle, date, username, reviewText);
+  const onPublishReview = () => {
+    console.log(reviewData.movieTitle, reviewData.date, reviewData.text);
+    if (!reviewData.movieTitle || !reviewData.date || !reviewData.text) {
+      setDisplayError("All fields are required.");
+      return;
+    }
+    const newReview = new ReviewObject(
+      username,
+      reviewData.movieTitle,
+      reviewData.date,
+      reviewData.text
+    );
+    console.log(newReview);
     let allReviews = JSON.parse(localStorage.getItem("allReviews"));
     if (!allReviews) {
       allReviews = [];
@@ -21,6 +36,15 @@ export function PublishReview({ username }) {
     allReviews.push(newReview);
     localStorage.setItem("allReviews", JSON.stringify(allReviews));
     navigate("/reviews");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setReviewData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    // console.log(formData);
   };
 
   return (
@@ -39,7 +63,7 @@ export function PublishReview({ username }) {
                 name="movieTitle"
                 placeholder="movie title"
                 required
-                onChange={(e) => (movieTitle = e.target.value)}
+                onChange={handleChange}
               />
               <br />
 
@@ -48,7 +72,7 @@ export function PublishReview({ username }) {
                 id="review-movie-title-input"
                 name="date"
                 required
-                onChange={(e) => (date = e.target.value)}
+                onChange={handleChange}
               />
 
               <div
@@ -64,13 +88,13 @@ export function PublishReview({ username }) {
               <br />
               <textarea
                 id="review-text-input"
-                name="reviewText"
+                name="text"
                 rows="6"
                 cols="50"
                 maxLength="300"
                 required
                 placeholder="300 character limit"
-                onChange={(e) => (reviewText = e.target.value)}
+                onChange={handleChange}
               ></textarea>
             </div>
           </div>
@@ -78,14 +102,17 @@ export function PublishReview({ username }) {
           <button
             className="btn btn-primary"
             type="submit"
-            onClick={() => onPublishReview(movieTitle, date, reviewText)}
+            onClick={onPublishReview}
           >
             Publish
           </button>
         </div>
+
+        <MessageDialog
+          message={displayError}
+          onHide={() => setDisplayError(null)}
+        />
       </main>
     )
   );
 }
-
-function PublishReviewForm({ username }) {}

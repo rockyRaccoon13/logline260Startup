@@ -1,5 +1,5 @@
 export class ReviewObject {
-  constructor(movieTitle, date, username, text) {
+  constructor(username, movieTitle, date, text) {
     this.movieTitle = movieTitle;
     this.username = username;
     this.likes = 0;
