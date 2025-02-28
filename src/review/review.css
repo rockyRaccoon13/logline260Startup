@@ -34,3 +34,11 @@
   align-content: start;
   width: 90%;
 }
+
+.review-likes {
+  border: thin solid rgb(196, 198, 198);
+}
+
+.review-likes:hover {
+  cursor: pointer;
+}

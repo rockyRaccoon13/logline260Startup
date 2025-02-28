@@ -1,8 +1,9 @@
 export class ReviewObject {
   constructor(username, movieTitle, date, text) {
+    this.id = Math.floor(Math.random() * 1000000);
     this.movieTitle = movieTitle;
     this.username = username;
-    this.likes = 0;
+    this.likedBy = [];
     this.text = text;
     this.date = this.changeDateFormat(date);
   }

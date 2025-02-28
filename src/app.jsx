@@ -81,7 +81,10 @@ export default function App() {
               authState
             )}
           />
-          <Route path="reviews" element={<BrowseReviews />} />
+          <Route
+            path="reviews"
+            element={<BrowseReviews username={username} />}
+          />
           <Route
             path="profile/:username"
             element={<UserProfile authUsername={username} />}
