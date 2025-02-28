@@ -22,7 +22,7 @@ class LikeEventNotifier {
   }
 
   broadcastEvent(from, type, value) {
-    console.log(`Broadcasting event: ${from} ${type} ${value}`);
+    // console.log(`Broadcasting event: ${from} ${type} ${value}`);
     const event = new EventMessage(from, type, value);
     this.receiveEvent(event);
   }
