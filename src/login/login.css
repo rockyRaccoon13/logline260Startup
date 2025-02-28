@@ -11,6 +11,10 @@ img {
   height: auto;
 }
 
+.movie-quote-movie {
+  font-style: italic;
+}
+
 @media (max-height: 500px) {
   img {
     display: none;
