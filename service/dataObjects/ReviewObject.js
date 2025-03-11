@@ -1,16 +1,20 @@
 export class ReviewObject {
   constructor(username, movieTitle, date, text) {
     this.id = Math.floor(Math.random() * 1000000);
-    this.movieTitle = movieTitle;
-    this.username = username;
     this.likedBy = [];
-    this.text = text;
-    this.date = this.changeDateFormat(date);
-  }
+    this.username = username;
 
-  changeDateFormat(date) {
-    let dateArray = date.split("-");
-    return `${dateArray[1]}/${dateArray[2]}/${dateArray[0]}`;
-    // mm/dd/yyyy
+    this.date = date;
+    this.movieTitle = movieTitle;
+    this.text = text;
   }
 }
+
+// Example JSON of ReviewObject
+const exampleReview = new ReviewObject(
+  "john_doe",
+  "Inception",
+  "2023-10-05",
+  "Great movie!"
+);
+console.log(JSON.stringify(exampleReview));
