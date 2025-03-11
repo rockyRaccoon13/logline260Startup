@@ -122,9 +122,10 @@ apiRouter.get("/reviews/:username", verifyAuth, async (req, res) => {
   }
 });
 
-apiRouter.post("/review/like/:reviewId", verifyAuth, async (req, res) => {
+apiRouter.post("/review/like", verifyAuth, async (req, res) => {
   const likerUsername = req.user.username;
-  const review = reviews.find((r) => r.id === req.params.reviewId);
+  const reviewId = req.body.reviewId;
+  const review = reviews.find((r) => r.id === reviewId);
   if (!review) {
     res.status(404).send({ msg: "Review not found" });
   } else {
@@ -135,13 +136,6 @@ apiRouter.post("/review/like/:reviewId", verifyAuth, async (req, res) => {
       review.likedBy = review.likedBy.filter((u) => u !== likerUsername);
     }
     res.send(review);
-  }
-  const user = await findUser("username", req.params.username);
-  if (!user) {
-    res.status(404).send({ msg: "User not found" });
-  } else {
-    const userReviews = reviews.filter((r) => r.username === user.username);
-    res.send(userReviews);
   }
 });
 
