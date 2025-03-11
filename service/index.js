@@ -108,6 +108,51 @@ apiRouter.put("/profile/:username", verifyAuth, async (req, res) => {
 
 //review endpoints
 
+apiRouter.get("/reviews", verifyAuth, async (req, res) => {
+  res.send(reviews);
+});
+
+apiRouter.get("/reviews/:username", verifyAuth, async (req, res) => {
+  const user = await findUser("username", req.params.username);
+  if (!user) {
+    res.status(404).send({ msg: "User not found" });
+  } else {
+    const userReviews = reviews.filter((r) => r.username === user.username);
+    res.send(userReviews);
+  }
+});
+
+apiRouter.post("/review/like/:reviewId", verifyAuth, async (req, res) => {
+  const likerUsername = req.user.username;
+  const review = reviews.find((r) => r.id === req.params.reviewId);
+  if (!review) {
+    res.status(404).send({ msg: "Review not found" });
+  } else {
+    if (!review.likedBy.includes(likerUsername)) {
+      review.likedBy.push(likerUsername);
+      review.numLike;
+    } else {
+      review.likedBy = review.likedBy.filter((u) => u !== likerUsername);
+    }
+    res.send(review);
+  }
+  const user = await findUser("username", req.params.username);
+  if (!user) {
+    res.status(404).send({ msg: "User not found" });
+  } else {
+    const userReviews = reviews.filter((r) => r.username === user.username);
+    res.send(userReviews);
+  }
+});
+
+apiRouter.post("/review", verifyAuth, async (req, res) => {
+  const user = req.user;
+  const review = { ...req.body, id: uuid.v4(), username: user.username };
+
+  reviews.push(review);
+  res.send(review);
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
@@ -136,8 +181,6 @@ async function findUser(field, value) {
 async function findProfile(username) {
   return profiles.find((p) => p.username === username);
 }
-
-// updateProfile = async (username, data) => {
 
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, user) {
