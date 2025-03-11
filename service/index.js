@@ -147,7 +147,12 @@ apiRouter.post("/review/like/:reviewId", verifyAuth, async (req, res) => {
 
 apiRouter.post("/review", verifyAuth, async (req, res) => {
   const user = req.user;
-  const review = { ...req.body, id: uuid.v4(), username: user.username };
+  const review = {
+    ...req.body,
+    id: uuid.v4(),
+    username: user.username,
+    likedBy: [],
+  };
 
   reviews.push(review);
   res.send(review);
