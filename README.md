@@ -146,11 +146,11 @@ Only the login and browse reviews pages are available to all users (however unau
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Use Express to handle HTTP requests on application backend
+- [x] **Static middleware for frontend** - serve front end via public folder
+- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable. **_Need to do this_**
+- [x] **Backend service endpoints** - Added and tested endpoints through curl.
+- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable. **_Need to do this_**
 
 ## 🚀 DB/Login deliverable
 
