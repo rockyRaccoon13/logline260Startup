@@ -1,0 +1,27 @@
+{"date":"2023-10-05","movieTitle":"Inception","text":"Great movie!"}
+
+
+users AUTH
+curl -X POST localhost:4000/api/auth/create -H 'Content-Type:application/json' -d '{"username":"user1", "password":"password1"}' --cookie-jar cookie1
+curl -X POST localhost:4000/api/auth/create -H 'Content-Type:application/json' -d '{"username":"user2", "password":"password2"}' --cookie-jar cookie2
+
+
+users LOGIN
+curl -X POST localhost:4000/api/auth/login -H 'Content-Type:application/json' -d '{"username":"user1", "password":"password1"}' --cookie-jar cookie1
+curl -X POST localhost:4000/api/auth/login -H 'Content-Type:application/json' -d '{"username":"user2", "password":"password2"}' --cookie-jar cookie2
+
+
+// REVIEWS
+curl localhost:4000/api/reviews --cookie cookie1 
+curl  localhost:4000/api/reviews --cookie cookie2 
+
+curl -X POST localhost:4000/api/review -H 'Content-Type:application/json' --cookie cookie1 -d '{"date":"2023-10-05","movieTitle":"Inception","text":"Great movie!"}'
+
+
+curl localhost:4000/api/reviews/user1 --cookie cookie2
+
+curl -X POST localhost:4000/api/review/like -H 'Content-Type:application/json' --cookie cookie2 -d '{"reviewId":"51a1441f-2ec8-4db7-9ca6-8a29a4d7c72d"}'
+
+
+
+
