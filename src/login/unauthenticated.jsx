@@ -2,8 +2,6 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./login.css";
-import Button from "react-bootstrap/Button";
-import { User } from "../dataObjects/UserObject";
 import { MessageDialog } from "./messageDialog";
 
 export function Unauthenticated(props) {
@@ -11,71 +9,92 @@ export function Unauthenticated(props) {
   const [password, setPassword] = React.useState("");
   const [displayError, setDisplayError] = React.useState(null);
 
+  async function registerOrLogin(endpoint) {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (response?.status === 200) {
+      localStorage.setItem("username", username);
+      props.onLogin(username);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
+
   async function loginUser() {
-    localStorage.getItem("users");
-    let allUsers = JSON.parse(localStorage.getItem("users"));
+    registerOrLogin("api/auth/login");
 
-    let user = allUsers.find((user) => user.username === username);
-    if (!user) {
-      // console.log("login failed - username does not exist");
-      setDisplayError(
-        "Username does not exist. Please check username or register new user"
-      );
-      return;
-    }
-    if (user.password !== password) {
-      // console.log("login failed - incorrect password");
-      setDisplayError("Invalid password");
-      return;
-    }
+    // localStorage.getItem("users");
+    // let allUsers = JSON.parse(localStorage.getItem("users"));
 
-    localStorage.setItem("username", username);
-    props.onLogin(username);
+    // let user = allUsers.find((user) => user.username === username);
+    // if (!user) {
+    //   // console.log("login failed - username does not exist");
+    //   setDisplayError(
+    //     "Username does not exist. Please check username or register new user"
+    //   );
+    //   return;
+    // }
+    // if (user.password !== password) {
+    //   // console.log("login failed - incorrect password");
+    //   setDisplayError("Invalid password");
+    //   return;
+    // }
+
+    // localStorage.setItem("username", username);
+    // props.onLogin(username);
   }
 
   async function registerUser() {
-    // console.log("registering user... " + username);
+    registerOrLogin("api/auth/create");
 
-    //check username, password constraints
-    if (username === "null" || username === "undefined") {
-      // console.log("register failed - username is null or undefined");
-      setDisplayError("Username cannot contain be 'null' or 'undefined'");
-      return;
-    }
-    if (username.includes(" ")) {
-      // console.log("register failed - username contains spaces");
-      setDisplayError("Username cannot contain spaces");
-      return;
-    }
-    if (password.includes(" ")) {
-      // console.log("register failed - password contains spaces");
-      setDisplayError("Password cannot contain spaces");
-      return;
-    }
+    // // console.log("registering user... " + username);
 
-    //check if username already exists
-    let allUsers = JSON.parse(localStorage.getItem("users"));
-    console.log(allUsers);
-    if (!allUsers) {
-      allUsers = [];
-    }
+    // //check username, password constraints
+    // if (username === "null" || username === "undefined") {
+    //   // console.log("register failed - username is null or undefined");
+    //   setDisplayError("Username cannot contain be 'null' or 'undefined'");
+    //   return;
+    // }
+    // if (username.includes(" ")) {
+    //   // console.log("register failed - username contains spaces");
+    //   setDisplayError("Username cannot contain spaces");
+    //   return;
+    // }
+    // if (password.includes(" ")) {
+    //   // console.log("register failed - password contains spaces");
+    //   setDisplayError("Password cannot contain spaces");
+    //   return;
+    // }
 
-    let user = allUsers.find((user) => user.username === username);
-    if (user) {
-      // console.log("register failed - username already exists");
-      setDisplayError("Username already exists");
-      return;
-    }
+    // //check if username already exists
+    // let allUsers = JSON.parse(localStorage.getItem("users"));
+    // console.log(allUsers);
+    // if (!allUsers) {
+    //   allUsers = [];
+    // }
 
-    //create new user
-    let newUser = new User(username, password);
-    allUsers.push(newUser);
-    // console.log(newUser);
+    // let user = allUsers.find((user) => user.username === username);
+    // if (user) {
+    //   // console.log("register failed - username already exists");
+    //   setDisplayError("Username already exists");
+    //   return;
+    // }
 
-    //register user
-    localStorage.setItem("users", JSON.stringify(allUsers));
-    localStorage.setItem("username", username);
-    props.onLogin(username);
+    // //create new user
+    // let newUser = new User(username, password);
+    // allUsers.push(newUser);
+    // // console.log(newUser);
+
+    // //register user
+    // localStorage.setItem("users", JSON.stringify(allUsers));
+    // localStorage.setItem("username", username);
+    // props.onLogin(username);
   }
 
   return (
