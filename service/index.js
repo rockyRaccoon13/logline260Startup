@@ -31,7 +31,7 @@ app.use(`/api`, apiRouter);
 //***AUTH ENDPOINTS***
 //register a new user
 apiRouter.post("/auth/create", async (req, res) => {
-  if (await findUser("username", req.body.username)) {
+  if (findUser("username", req.body.username)) {
     res.status(409).send({ msg: "Existing User" });
     return;
   } else {
@@ -48,7 +48,7 @@ apiRouter.post("/auth/create", async (req, res) => {
 
 // login an existing user
 apiRouter.post("/auth/login", async (req, res) => {
-  const user = await findUser("username", req.body.username);
+  const user = findUser("username", req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user);
@@ -61,7 +61,7 @@ apiRouter.post("/auth/login", async (req, res) => {
 
 // logout a user
 apiRouter.delete("/auth/logout", async (req, res) => {
-  const user = await findUser("token", req.cookies[authCookieName]);
+  const user = findUser("token", req.cookies[authCookieName]);
 
   clearAuthCookie(res, user);
   res.status(204).end();
@@ -69,7 +69,7 @@ apiRouter.delete("/auth/logout", async (req, res) => {
 
 // Middle ware to verify auth
 const verifyAuth = async (req, res, next) => {
-  const user = await findUser("token", req.cookies[authCookieName]);
+  const user = findUser("token", req.cookies[authCookieName]);
   if (user) {
     req.user = user;
     next();
@@ -81,9 +81,9 @@ const verifyAuth = async (req, res, next) => {
 //***USER ENDPOINTS***
 //get a user's profile
 apiRouter.get("/profile/:username", verifyAuth, async (req, res) => {
-  const user = await findUser("username", req.params.username);
+  const user = findUser("username", req.params.username);
   if (user) {
-    const profile = await findProfile(req.params.username);
+    const profile = findProfile(req.params.username);
     res.send(profile);
   } else {
     res.status(404).send({ msg: "User not found" });
@@ -91,14 +91,15 @@ apiRouter.get("/profile/:username", verifyAuth, async (req, res) => {
 });
 
 //update a user's profile
-apiRouter.put("/profile/:username", verifyAuth, async (req, res) => {
-  const user = await findUser("username", req.params.username);
+apiRouter.post("/profile/:username", verifyAuth, async (req, res) => {
+  const user = findUser("username", req.params.username);
   if (user && user === req.user) {
-    const profile = await findProfile(req.params.username);
+    console.log(req);
+    const profile = findProfile(req.params.username);
     profile.data = { ...profile.data, ...req.body.data };
     res.send(profile);
   } else {
-    res.status(401).send({ msg: "Unauthorized" });
+    res.status(403).send({ msg: "Unauthorized" });
   }
 });
 
@@ -109,7 +110,7 @@ apiRouter.get("/reviews", verifyAuth, async (req, res) => {
 });
 
 apiRouter.get("/reviews/:username", verifyAuth, async (req, res) => {
-  const user = await findUser("username", req.params.username);
+  const user = findUser("username", req.params.username);
   if (!user) {
     res.status(404).send({ msg: "User not found" });
   } else {
@@ -190,12 +191,12 @@ function getReviews(curUsername = null) {
   }));
 }
 
-async function findUser(field, value) {
+function findUser(field, value) {
   if (!value) return null;
   return users.find((u) => u[field] === value);
 }
 
-async function findProfile(username) {
+function findProfile(username) {
   return profiles.find((p) => p.username === username);
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./editProfile.css";
 import "../profile/profile.css";
@@ -6,37 +6,49 @@ import "../profile/profile.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function EditProfile({ authUsername }) {
-  const { username: editUsername } = useParams();
+  const { username: profileUsername } = useParams();
 
   return (
     <main>
-      <h1>Editing {editUsername}'s Profile</h1>
-      {editUsername === authUsername ? (
+      <h1>Editing {profileUsername}'s Profile</h1>
+      {profileUsername === authUsername ? (
         <>
           <p>Make changes to your profile below.</p>
-          <EditProfileForm username={editUsername} />
+          <EditProfileForm profileUsername={profileUsername} />
         </>
       ) : (
-        <p>405: Unauthorized to make changes to {editUsername}'s profile.</p>
+        <p>401: Unauthorized to make changes to {profileUsername}'s profile.</p>
       )}
     </main>
   );
 }
 
-export function EditProfileForm({ username }) {
+export function EditProfileForm({ profileUsername }) {
   const navigate = useNavigate();
-  const [profileUser] = React.useState(
-    JSON.parse(localStorage.getItem("users")).find(
-      (u) => u.username === username
-    )
-  );
+  const [profile, setProfile] = React.useState(null);
 
-  const [formData, setFormData] = React.useState({
-    firstName: profileUser.data.firstName || "",
-    lastName: profileUser.data.lastName || "",
-    profileQuote: profileUser.data.profileQuote || "",
-    bioText: profileUser.data.bioText || "",
-  });
+  const [formData, setFormData] = React.useState(null);
+
+  function fetchProfile(username) {
+    fetch(`/api/profile/${username}`)
+      .then((response) => response.json())
+      .then((profile) => {
+        setProfile(profile);
+      });
+  }
+
+  useEffect(() => {
+    fetchProfile(profileUsername);
+  }, [profileUsername]);
+
+  useEffect(() => {
+    setFormData({
+      firstName: profile?.data.firstName,
+      lastName: profile?.data.lastName,
+      profileQuote: profile?.data.profileQuote,
+      bioText: profile?.data.bioText,
+    });
+  }, [profile]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,17 +60,15 @@ export function EditProfileForm({ username }) {
   };
 
   const handleSubmit = () => {
-    let allUsers = JSON.parse(localStorage.getItem("users"));
-    const curUserIndex = allUsers.findIndex((u) => u.username === username);
-    // console.log(username + "  " + curUserIndex + " " + allUsers[curUserIndex]);
+    fetch(`/api/profile/${profileUsername}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({ data: { ...formData } }),
+    });
 
-    allUsers[curUserIndex].data = {
-      ...allUsers[curUserIndex].data,
-      ...formData,
-    };
-    // console.log(allUsers);
-    localStorage.setItem("users", JSON.stringify(allUsers));
-    navigate(`/profile/${username}`);
+    navigate(`/profile/${profileUsername}`);
   };
 
   return (
@@ -71,7 +81,7 @@ export function EditProfileForm({ username }) {
               id="profile-first-name"
               name="firstName"
               placeholder="first name"
-              value={formData.firstName}
+              value={formData?.firstName}
               onChange={handleChange}
             />
 
@@ -80,23 +90,23 @@ export function EditProfileForm({ username }) {
               id="profile-last-name"
               name="lastName"
               placeholder="last name"
-              value={formData.lastName}
+              value={formData?.lastName}
               onChange={handleChange}
             />
           </h2>
 
-          <h2 id="profile-username">@{username}</h2>
+          <h2 id="profile-username">@{profile?.username}</h2>
           <h3>
             <input
               type="text"
               className="profile-quote"
               name="profileQuote"
               placeholder="quote"
-              value={formData.profileQuote}
+              value={formData?.profileQuote}
               onChange={handleChange}
             />
           </h3>
-          <h3 id="date-joined">Joined: {profileUser.data.joinDate}</h3>
+          <h3 id="date-joined">Joined: {profile?.data.joinDate}</h3>
         </div>
 
         <div className="profile-bio">
@@ -107,7 +117,7 @@ export function EditProfileForm({ username }) {
             maxLength="500"
             rows="3"
             placeholder="optional - 500 character limit"
-            value={formData.bioText}
+            value={formData?.bioText}
             onChange={handleChange}
           ></textarea>
         </div>
@@ -123,7 +133,7 @@ export function EditProfileForm({ username }) {
         <button
           className="btn btn-danger"
           type="submit"
-          onClick={() => navigate(`/profile/${username}`)}
+          onClick={() => navigate(`/profile/${profileUsername}`)}
         >
           Cancel
         </button>
