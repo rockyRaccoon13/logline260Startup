@@ -6,28 +6,17 @@ import { ReviewList } from "../review/Review";
 export function BrowseReviews({ username }) {
   let [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    const allReviewsText = localStorage.getItem("allReviews");
-    if (allReviewsText) {
-      setReviews(JSON.parse(allReviewsText));
-    }
-    // console.log(reviews);
-  }, []);
+  function fetchReviews() {
+    fetch("/api/reviews")
+      .then((response) => response.json())
+      .then((reviews) => {
+        setReviews(reviews);
+      });
+  }
 
-  const doLikeReview = (reviewId) => {
-    if (!username) {
-      return;
-    }
-    const allReviews = JSON.parse(localStorage.getItem("allReviews"));
-    const review = allReviews.find((r) => r.id === reviewId);
-    if (!review.likedBy.includes(username)) {
-      review.likedBy.push(username);
-    } else {
-      review.likedBy = review.likedBy.filter((u) => u !== username);
-    }
-    localStorage.setItem("allReviews", JSON.stringify(allReviews));
-    setReviews(allReviews);
-  };
+  useEffect(() => {
+    fetchReviews();
+  }, []);
 
   return (
     <>
@@ -37,11 +26,7 @@ export function BrowseReviews({ username }) {
         {reviews.length === 0 ? (
           <div>There are no reviews yet!</div>
         ) : (
-          <ReviewList
-            username={username}
-            reviews={reviews}
-            doLikeReview={doLikeReview}
-          />
+          <ReviewList username={username} reviews={reviews} />
         )}
       </main>
     </>
