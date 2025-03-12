@@ -83,11 +83,17 @@ export default function App() {
           />
           <Route
             path="reviews"
-            element={<BrowseReviews username={username} />}
+            element={requireAuth(
+              <BrowseReviews username={username} />,
+              authState
+            )}
           />
           <Route
             path="profile/:username"
-            element={<Profile authUsername={username} />}
+            element={requireAuth(
+              <Profile authUsername={username} />,
+              authState
+            )}
           />
           <Route
             path="profile/:username/edit"
@@ -118,7 +124,7 @@ function requireAuth(component, authState) {
 function Unauthorized() {
   return (
     <main className="container-fluid  text-center">
-      405: Must be logged in to view this page.
+      401: Must be logged in to view this page.
     </main>
   );
 }
