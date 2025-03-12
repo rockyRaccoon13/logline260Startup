@@ -9,12 +9,3 @@ export class ReviewObject {
     this.text = text;
   }
 }
-
-// Example JSON of ReviewObject
-const exampleReview = new ReviewObject(
-  "john_doe",
-  "Inception",
-  "2023-10-05",
-  "Great movie!"
-);
-console.log(JSON.stringify(exampleReview));
