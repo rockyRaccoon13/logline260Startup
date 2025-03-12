@@ -28,73 +28,10 @@ export function Unauthenticated(props) {
 
   async function loginUser() {
     registerOrLogin("api/auth/login");
-
-    // localStorage.getItem("users");
-    // let allUsers = JSON.parse(localStorage.getItem("users"));
-
-    // let user = allUsers.find((user) => user.username === username);
-    // if (!user) {
-    //   // console.log("login failed - username does not exist");
-    //   setDisplayError(
-    //     "Username does not exist. Please check username or register new user"
-    //   );
-    //   return;
-    // }
-    // if (user.password !== password) {
-    //   // console.log("login failed - incorrect password");
-    //   setDisplayError("Invalid password");
-    //   return;
-    // }
-
-    // localStorage.setItem("username", username);
-    // props.onLogin(username);
   }
 
   async function registerUser() {
     registerOrLogin("api/auth/create");
-
-    // // console.log("registering user... " + username);
-
-    // //check username, password constraints
-    // if (username === "null" || username === "undefined") {
-    //   // console.log("register failed - username is null or undefined");
-    //   setDisplayError("Username cannot contain be 'null' or 'undefined'");
-    //   return;
-    // }
-    // if (username.includes(" ")) {
-    //   // console.log("register failed - username contains spaces");
-    //   setDisplayError("Username cannot contain spaces");
-    //   return;
-    // }
-    // if (password.includes(" ")) {
-    //   // console.log("register failed - password contains spaces");
-    //   setDisplayError("Password cannot contain spaces");
-    //   return;
-    // }
-
-    // //check if username already exists
-    // let allUsers = JSON.parse(localStorage.getItem("users"));
-    // console.log(allUsers);
-    // if (!allUsers) {
-    //   allUsers = [];
-    // }
-
-    // let user = allUsers.find((user) => user.username === username);
-    // if (user) {
-    //   // console.log("register failed - username already exists");
-    //   setDisplayError("Username already exists");
-    //   return;
-    // }
-
-    // //create new user
-    // let newUser = new User(username, password);
-    // allUsers.push(newUser);
-    // // console.log(newUser);
-
-    // //register user
-    // localStorage.setItem("users", JSON.stringify(allUsers));
-    // localStorage.setItem("username", username);
-    // props.onLogin(username);
   }
 
   return (
