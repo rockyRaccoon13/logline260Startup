@@ -105,7 +105,7 @@ apiRouter.put("/profile/:username", verifyAuth, async (req, res) => {
 //review endpoints
 
 apiRouter.get("/reviews", verifyAuth, async (req, res) => {
-  res.send(reviews);
+  res.send(getReviews(req.user.username));
 });
 
 apiRouter.get("/reviews/:username", verifyAuth, async (req, res) => {
@@ -113,7 +113,10 @@ apiRouter.get("/reviews/:username", verifyAuth, async (req, res) => {
   if (!user) {
     res.status(404).send({ msg: "User not found" });
   } else {
-    const userReviews = reviews.filter((r) => r.username === user.username);
+    let userReviews = getReviews(req.user.username).filter(
+      (r) => r.username === user.username
+    );
+
     res.send(userReviews);
   }
 });
@@ -171,6 +174,20 @@ function createProfile(username) {
   profiles.push(profile);
 
   return profile;
+}
+
+function getReviews(curUsername = null) {
+  return reviews.map((review) => ({
+    id: review.id,
+    username: review.username,
+    movieTitle: review.movieTitle,
+    date: review.date,
+    text: review.text,
+    numLikes: review.likedBy.length,
+    isLikedByCurUser: curUsername
+      ? review.likedBy.includes(curUsername)
+      : false,
+  }));
 }
 
 async function findUser(field, value) {

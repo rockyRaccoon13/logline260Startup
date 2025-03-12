@@ -49,7 +49,9 @@ function ProfileCard({ profile, numReviews }) {
         <h3>
           <span className="date-joined">Joined: {profile.data.joinDate}</span>
         </h3>
-        <h3 className="profile-num-reviews">{numReviews} Reviews</h3>
+        <h3 className="profile-num-reviews">
+          {numReviews} {numReviews === 1 ? "Review" : "Reviews"}
+        </h3>
       </div>
       <div className="profile-bio">
         <h3>Bio</h3>
@@ -101,7 +103,7 @@ function ProfileFound({ authUsername, profile }) {
       ) : (
         <>
           <h3 className="user-review-heading">@{profile.username}'s Reviews</h3>
-          <ReviewList authUsername={authUsername} reviews={profileReviews} />
+          <ReviewList reviews={profileReviews} />
         </>
       )}
     </>

@@ -3,18 +3,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import "./review.css";
 
-export function ReviewList({ authUsername, reviews }) {
+export function ReviewList({ reviews }) {
   let key = 0;
   return (
     <div className="review-list">
       {reviews.map((review) => (
-        <Review authUsername={authUsername} review={review} key={key++} />
+        <Review review={review} key={key++} />
       ))}
     </div>
   );
 }
 
-export function Review({ authUsername, review }) {
+export function Review({ review }) {
   const navigate = useNavigate();
 
   return (
@@ -30,7 +30,7 @@ export function Review({ authUsername, review }) {
         >
           @{review.username}
         </div>
-        <ReviewLikes authUsername={authUsername} review={review} />
+        <ReviewLikes review={review} />
       </div>
       <br />
       <div className="review-text">{review.text}</div>
@@ -38,15 +38,11 @@ export function Review({ authUsername, review }) {
   );
 }
 
-function ReviewLikes({ authUsername, review }) {
-  const [isLikedByCurUser, setIsLikedByCurUser] = React.useState(false);
-  const [likes, setLikes] = React.useState(review.likedBy.length);
-
-  React.useEffect(() => {
-    if (review.likedBy.includes(authUsername)) {
-      setIsLikedByCurUser(true);
-    }
-  }, [authUsername]);
+function ReviewLikes({ review }) {
+  const [isLikedByCurUser, setIsLikedByCurUser] = React.useState(
+    review.isLikedByCurUser
+  );
+  const [likes, setLikes] = React.useState(review.numLikes);
 
   const handleLike = () => {
     fetch("/api/review/like", {

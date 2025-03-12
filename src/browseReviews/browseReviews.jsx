@@ -26,7 +26,7 @@ export function BrowseReviews({ username }) {
         {reviews.length === 0 ? (
           <div>There are no reviews yet!</div>
         ) : (
-          <ReviewList username={username} reviews={reviews} />
+          <ReviewList reviews={reviews} />
         )}
       </main>
     </>

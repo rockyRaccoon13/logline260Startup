@@ -31,34 +31,21 @@ export function PublishReview({ username }) {
     }
   }
 
-  //   console.log(reviewData.movieTitle, reviewData.date, reviewData.text);
-  //   if (!reviewData.movieTitle || !reviewData.date || !reviewData.text) {
-  //     setDisplayError("All fields are required.");
-  //     return;
-  //   }
-  //   const newReview = new ReviewObject(
-  //     username,
-  //     reviewData.movieTitle,
-  //     reviewData.date,
-  //     reviewData.text
-  //   );
-  //   console.log(newReview);
-  //   let allReviews = JSON.parse(localStorage.getItem("allReviews"));
-  //   if (!allReviews) {
-  //     allReviews = [];
-  //   }
-  //   allReviews.push(newReview);
-  //   localStorage.setItem("allReviews", JSON.stringify(allReviews));
-
-  // };
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "date") {
+      value = reformattedDate(value);
+    }
     setReviewData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
     // console.log(formData);
+  };
+
+  const reformattedDate = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${month}/${day}/${year}`;
   };
 
   return (
@@ -117,6 +104,9 @@ export function PublishReview({ username }) {
             className="btn btn-primary"
             type="submit"
             onClick={onPublishReview}
+            disabled={
+              !reviewData.movieTitle || !reviewData.date || !reviewData.text
+            }
           >
             Publish
           </button>
