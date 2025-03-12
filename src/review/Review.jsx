@@ -3,25 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import "./review.css";
 
-export function ReviewList({ username, reviews, doLikeReview }) {
+export function ReviewList({ authUsername, reviews }) {
   let key = 0;
   return (
     <div className="review-list">
       {reviews.map((review) => (
-        <Review
-          username={username}
-          review={review}
-          doLikeReview={doLikeReview}
-          key={key++}
-        />
+        <Review authUsername={authUsername} review={review} key={key++} />
       ))}
     </div>
   );
 }
 
-export function Review({ username, review, doLikeReview }) {
+export function Review({ authUsername, review }) {
   const navigate = useNavigate();
-  // console.log(review);
+
   return (
     <div className="review">
       <div className="review-data">
@@ -35,11 +30,7 @@ export function Review({ username, review, doLikeReview }) {
         >
           @{review.username}
         </div>
-        <ReviewLikes
-          username={username}
-          review={review}
-          doLikeReview={doLikeReview}
-        />
+        <ReviewLikes authUsername={authUsername} review={review} />
       </div>
       <br />
       <div className="review-text">{review.text}</div>
@@ -47,35 +38,37 @@ export function Review({ username, review, doLikeReview }) {
   );
 }
 
-function ReviewLikes({ username: curUsername, review, doLikeReview }) {
+function ReviewLikes({ authUsername, review }) {
   const [isLikedByCurUser, setIsLikedByCurUser] = React.useState(false);
   const [likes, setLikes] = React.useState(review.likedBy.length);
 
   React.useEffect(() => {
-    if (review.likedBy.includes(curUsername)) {
+    if (review.likedBy.includes(authUsername)) {
       setIsLikedByCurUser(true);
     }
-  }, [curUsername]);
+  }, [authUsername]);
 
   const handleLike = () => {
-    if (!curUsername) {
-      return;
-    }
-    if (isLikedByCurUser) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes + 1);
-    }
-    setIsLikedByCurUser(!isLikedByCurUser);
-    doLikeReview(review.id);
+    fetch("/api/review/like", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({ reviewId: review.id }),
+    })
+      .then((response) => response.json())
+      .then((likes) => {
+        setLikes(likes.num);
+        setIsLikedByCurUser(likes.userHasLiked);
+      });
   };
 
   return (
     <div className="review-likes" onClick={handleLike}>
       <span className="review-likes-emoji">
-        {isLikedByCurUser ? "❤️" : "🤍"}
+        {isLikedByCurUser ? "❤️" : "🤍 "}
       </span>
-      <span className="review-likes-num">{likes}</span>
+      <span className="review-likes-num"> {likes}</span>
     </div>
   );
 }

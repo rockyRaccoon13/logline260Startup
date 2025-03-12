@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 
-import { UserProfile } from "./profile/viewProfile";
+import { Profile } from "./profile/viewProfile";
 import { BrowseReviews } from "./browseReviews/browseReviews";
 import { EditProfile } from "./profile/editProfile";
 import { PublishReview } from "./publish/publishReview";
@@ -87,7 +87,7 @@ export default function App() {
           />
           <Route
             path="profile/:username"
-            element={<UserProfile authUsername={username} />}
+            element={<Profile authUsername={username} />}
           />
           <Route
             path="profile/:username/edit"

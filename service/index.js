@@ -46,10 +46,6 @@ apiRouter.post("/auth/create", async (req, res) => {
   }
 });
 
-apiRouter.get("/ok", async (req, res) => {
-  res.send({ msg: "ok test" });
-});
-
 // login an existing user
 apiRouter.post("/auth/login", async (req, res) => {
   const user = await findUser("username", req.body.username);
@@ -126,16 +122,21 @@ apiRouter.post("/review/like", verifyAuth, async (req, res) => {
   const likerUsername = req.user.username;
   const reviewId = req.body.reviewId;
   const review = reviews.find((r) => r.id === reviewId);
+  let userHasLiked = false;
   if (!review) {
     res.status(404).send({ msg: "Review not found" });
   } else {
     if (!review.likedBy.includes(likerUsername)) {
       review.likedBy.push(likerUsername);
-      review.numLike;
+      userHasLiked = true;
     } else {
       review.likedBy = review.likedBy.filter((u) => u !== likerUsername);
+      userHasLiked = false;
     }
-    res.send(review);
+    res.send({
+      num: review.likedBy.length,
+      userHasLiked: userHasLiked,
+    });
   }
 });
 
