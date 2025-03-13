@@ -24,7 +24,6 @@ export function EditProfile({ authUsername }) {
 }
 
 export function EditProfileForm({ profileUsername }) {
-  console.log(profileUsername);
   const navigate = useNavigate();
   const [profile, setProfile] = React.useState(undefined);
 

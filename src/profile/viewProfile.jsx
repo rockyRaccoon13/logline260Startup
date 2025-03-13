@@ -35,7 +35,7 @@ export function Profile({ authUsername }) {
 }
 
 function ProfileCard({ profile, numReviews }) {
-  console.log("making card for profile.. " + JSON.stringify(profile));
+  // console.log("making card for profile.. " + JSON.stringify(profile));
   return (
     <div className="profile">
       <div className="profile-data">
