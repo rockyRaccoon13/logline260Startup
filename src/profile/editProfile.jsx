@@ -24,10 +24,11 @@ export function EditProfile({ authUsername }) {
 }
 
 export function EditProfileForm({ profileUsername }) {
+  console.log(profileUsername);
   const navigate = useNavigate();
-  const [profile, setProfile] = React.useState(null);
+  const [profile, setProfile] = React.useState(undefined);
 
-  const [formData, setFormData] = React.useState(null);
+  const [formData, setFormData] = React.useState(undefined);
 
   function fetchProfile(username) {
     fetch(`/api/profile/${username}`)
@@ -81,7 +82,7 @@ export function EditProfileForm({ profileUsername }) {
               id="profile-first-name"
               name="firstName"
               placeholder="first name"
-              value={formData?.firstName}
+              value={formData?.firstName || ""}
               onChange={handleChange}
             />
 
@@ -90,7 +91,7 @@ export function EditProfileForm({ profileUsername }) {
               id="profile-last-name"
               name="lastName"
               placeholder="last name"
-              value={formData?.lastName}
+              value={formData?.lastName || ""}
               onChange={handleChange}
             />
           </h2>
@@ -102,7 +103,7 @@ export function EditProfileForm({ profileUsername }) {
               className="profile-quote"
               name="profileQuote"
               placeholder="quote"
-              value={formData?.profileQuote}
+              value={formData?.profileQuote || ""}
               onChange={handleChange}
             />
           </h3>
@@ -117,7 +118,7 @@ export function EditProfileForm({ profileUsername }) {
             maxLength="500"
             rows="3"
             placeholder="optional - 500 character limit"
-            value={formData?.bioText}
+            value={formData?.bioText || ""}
             onChange={handleChange}
           ></textarea>
         </div>
