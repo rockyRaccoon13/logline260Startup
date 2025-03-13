@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
 const cookieParser = require("cookie-parser");
-const { User, Profile } = require("./dataObjects/UserObject");
+
 const app = express();
 
 const authCookieName = "token";
@@ -213,4 +213,32 @@ function setAuthCookie(res, user) {
 function clearAuthCookie(res, user) {
   delete user.token;
   res.clearCookie(authCookieName);
+}
+
+class User {
+  username;
+  password;
+
+  constructor(username, password) {
+    this.username = username;
+    this.password = password;
+  }
+}
+
+class Profile {
+  username;
+  data = {
+    joinDate: null,
+    firstName: null,
+    lastName: null,
+    quote: null,
+    bioText: null,
+  };
+  constructor(username) {
+    this.username = username;
+    let date = new Date();
+    this.data.joinDate = `${
+      date.getMonth() + 1
+    }/${date.getDate()}/${date.getFullYear()}`;
+  }
 }
