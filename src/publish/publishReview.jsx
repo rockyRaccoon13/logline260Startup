@@ -5,7 +5,7 @@ import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
 import { MessageDialog } from "../login/messageDialog";
 
-const maxLength = 300;
+const maxLength = 200;
 
 export function PublishReview({ username }) {
   const [displayError, setDisplayError] = React.useState(null);
@@ -108,7 +108,7 @@ export function PublishReview({ username }) {
                   color:
                     reviewData.text.length === maxLength
                       ? "rgb(227, 115, 115)"
-                      : reviewData.text.length >= maxLength - 20
+                      : reviewData.text.length >= maxLength * 0.8
                       ? "rgb(211, 217, 89)"
                       : "inherit",
                 }}
