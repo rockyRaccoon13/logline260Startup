@@ -70,11 +70,9 @@ export function PublishReview({ username }) {
                 required
                 onChange={handleChange}
               />
-
               {/* TODO add Rating capability */}
-              {/* <label>Rating:</label>
+              {/* <label>Rating (coming soon):</label>
               <RatingInputStarArray></RatingInputStarArray> */}
-
               <label htmlFor="review-date-input">Date watched:</label>
               <input
                 id="review-date-input"
@@ -84,7 +82,6 @@ export function PublishReview({ username }) {
                 required
                 onChange={handleChange}
               />
-
               <div
                 className="review-username"
                 onClick={() => navigate(`/profile/${username}`)}
