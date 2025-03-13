@@ -5,6 +5,8 @@ import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
 import { MessageDialog } from "../login/messageDialog";
 
+const maxLength = 300;
+
 export function PublishReview({ username }) {
   const [displayError, setDisplayError] = React.useState(null);
   const [reviewData, setReviewData] = React.useState({
@@ -58,7 +60,9 @@ export function PublishReview({ username }) {
         <div className="publish-review-form">
           <div className="review">
             <div className="review-data mb-3">
+              <label htmlFor="review-movie-title-input">Movie:</label>
               <input
+                id="review-movie-title-input"
                 type="text"
                 className="review-movie-title"
                 name="movieTitle"
@@ -67,8 +71,9 @@ export function PublishReview({ username }) {
                 onChange={handleChange}
               />
               <br />
-
+              <label htmlFor="review-date-input">Date watched:</label>
               <input
+                id="review-date-input"
                 type="date"
                 className="review-date"
                 name="date"
@@ -92,11 +97,24 @@ export function PublishReview({ username }) {
                 name="text"
                 rows="6"
                 cols="50"
-                maxLength="300"
+                maxLength={maxLength}
                 required
-                placeholder="300 character limit"
+                placeholder={`${maxLength} character limit`}
                 onChange={handleChange}
               ></textarea>
+              <div
+                className="char-count"
+                style={{
+                  color:
+                    reviewData.text.length === maxLength
+                      ? "rgb(227, 115, 115)"
+                      : reviewData.text.length >= maxLength - 20
+                      ? "rgb(211, 217, 89)"
+                      : "inherit",
+                }}
+              >
+                {`${reviewData.text.length}/${maxLength}`}
+              </div>
             </div>
           </div>
 

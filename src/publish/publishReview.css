@@ -9,3 +9,13 @@
 input {
   margin: 0.25em;
 }
+
+label {
+  margin: 0.25em;
+  color: inherit;
+  background-color: inherit;
+}
+
+.char-count {
+  text-align: end;
+}
