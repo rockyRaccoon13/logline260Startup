@@ -148,9 +148,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Node.js/Express HTTP service** - Use Express to handle HTTP requests on application backend
 - [x] **Static middleware for frontend** - serve front end via public folder
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable. **_Need to do this_**
-- [x] **Backend service endpoints** - Added and tested endpoints through curl.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable. **_Need to do this_**
+- [x] **Calls to third party endpoints** - Login.jsx calls a movie database to get a poster url (searches by movie title)
+- [x] **Backend service endpoints** - Added and tested endpoints through curl. backends for auth, profile, reviews, likes, and some movie quotes
+- [x] **Frontend calls service endpoints** - front end calls backend
 
 ## 🚀 DB/Login deliverable
 
