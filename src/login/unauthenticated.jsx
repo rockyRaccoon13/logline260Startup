@@ -10,6 +10,17 @@ export function Unauthenticated(props) {
   const [displayError, setDisplayError] = React.useState(null);
 
   async function registerOrLogin(endpoint) {
+    if (username.includes(" ")) {
+      // console.log("register failed - username contains spaces");
+      setDisplayError("Username cannot contain spaces");
+      return;
+    }
+    if (password.includes(" ")) {
+      // console.log("register failed - password contains spaces");
+      setDisplayError("Password cannot contain spaces");
+      return;
+    }
+
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
