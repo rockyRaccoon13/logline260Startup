@@ -23,8 +23,11 @@ export function Authenticated(props) {
     <div
       style={{ textAlign: "center", display: "flex", flexDirection: "column" }}
     >
-      <h1 onClick={() => navigate(`/profile/${props.username}`)}>
-        Hello {props.username}!
+      <h1
+        onClick={() => navigate(`/profile/${props.username}`)}
+        style={{ cursor: "pointer" }}
+      >
+        Hello, @{props.username}!
       </h1>
       <Button
         className="mb-1"

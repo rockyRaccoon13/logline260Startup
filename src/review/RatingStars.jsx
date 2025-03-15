@@ -34,7 +34,7 @@ function RatingStar({ num, rating, showEmptyStar = false, setRating = null }) {
   };
   const fill = num <= rating ? 1 : rating === num - 0.5 ? 0.5 : 0;
   return (
-    <span onClick={handleClick}>
+    <span onClick={handleClick} style={setRating && { cursor: "pointer" }}>
       {fill === 0 ? (
         showEmptyStar && <Star fill={fill}></Star>
       ) : (

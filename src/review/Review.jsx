@@ -33,6 +33,7 @@ export function Review({ review }) {
           <div
             className="review-username"
             onClick={() => navigate(`/profile/${review.username}`)}
+            style={{ cursor: "pointer" }}
           >
             @{review.username}
           </div>
