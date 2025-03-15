@@ -1,7 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 
 import { Profile } from "./profile/viewProfile";
 import { BrowseReviews } from "./browseReviews/browseReviews";
@@ -122,9 +128,20 @@ function requireAuth(component, authState) {
 }
 
 function Unauthorized() {
+  const navigate = useNavigate();
+  const loginPath = "/";
+
   return (
     <main className="container-fluid  text-center">
-      401: Must be logged in to view this page. Bu
+      401: Must be logged in to view this page. Please log in.
+      <button
+        className="btn btn-primary me-2"
+        type="submit"
+        id="login-button"
+        onClick={() => navigate(loginPath)}
+      >
+        Login
+      </button>
     </main>
   );
 }
