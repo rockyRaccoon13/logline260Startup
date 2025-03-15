@@ -15,14 +15,14 @@ let reviews = [];
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
+// Serve up the front-end static content hosting
+app.use(express.static("public"));
+
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
 // Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
-
-// Serve up the front-end static content hosting
-app.use(express.static("public"));
 
 // Router for service endpoints
 let apiRouter = express.Router();
@@ -163,8 +163,14 @@ apiRouter.get("/quote", async (req, res) => {
   res.send(randomQuotes[randomIndex]);
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Default error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile("index.html", { root: "public" });
 });
 
 async function createUser(username, password) {
@@ -214,6 +220,10 @@ function findUser(field, value) {
 function findProfile(username) {
   return profiles.find((p) => p.username === username);
 }
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, user) {
