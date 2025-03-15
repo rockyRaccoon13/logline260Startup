@@ -73,8 +73,7 @@ export function PublishReview({ username }) {
                 required
                 onChange={handleChange}
               />
-              Rating
-              <label>Rating:</label>
+              Rating:
               <RatingInputStarArray
                 rating={rating}
                 setRating={setRating}
