@@ -7,6 +7,7 @@ import { MessageDialog } from "../login/messageDialog";
 import { RatingInputStarArray } from "../review/RatingStars";
 
 const maxLength = 400;
+const maxRating = 5;
 
 export function PublishReview({ username }) {
   const [displayError, setDisplayError] = React.useState(null);
@@ -65,7 +66,6 @@ export function PublishReview({ username }) {
     username && (
       <main>
         <h1>New Review</h1>
-        <div className="user-instruction">All fields are required.</div>
 
         <br />
         <div className="publish-review-form">
@@ -79,6 +79,9 @@ export function PublishReview({ username }) {
             </div>
             <div className="review-data mb-3">
               <label htmlFor="review-movie-title-input">Movie:</label>
+              <div style={{ fontSize: "0.5em" }}>
+                After entering a title, you may search and select a poster above
+              </div>
               <input
                 id="review-movie-title-input"
                 type="text"
@@ -88,12 +91,18 @@ export function PublishReview({ username }) {
                 required
                 onChange={handleChange}
               />
-              Rating:
+              <label htmlFor="review-star-input"> Rating:</label>
+
+              <div style={{ fontSize: "0.5em" }}>
+                Select a rating from 0 to {maxRating} stars
+              </div>
               <RatingInputStarArray
+                id="review-star-input"
                 rating={rating}
                 setRating={setRating}
+                maxRating={maxRating}
               ></RatingInputStarArray>
-              <label htmlFor="review-date-input">Date watched:</label>
+              <label htmlFor="review-date-input">Date watched: </label>
               <input
                 id="review-date-input"
                 type="date"
@@ -138,6 +147,9 @@ export function PublishReview({ username }) {
               </div>
             </div>
           </div>
+          <div className="user-instruction">
+            <span>All fields are required (except poster).</span>
+          </div>
 
           <button
             className="btn btn-primary"
@@ -179,15 +191,6 @@ function PosterSearch({ movieTitle, setUpTreeValue }) {
 
   return (
     <div className="poster-search">
-      {movieTitle && (
-        <button
-          className="btn btn-secondary"
-          type="button"
-          onClick={searchForPoster}
-        >
-          Search for Poster
-        </button>
-      )}
       <div className="poster-results">
         {searchResults.slice(0, 4).map((result) => (
           <img
@@ -205,6 +208,21 @@ function PosterSearch({ movieTitle, setUpTreeValue }) {
           />
         ))}
       </div>
+
+      <button
+        className="btn btn-secondary"
+        type="button"
+        disabled={!movieTitle}
+        onClick={searchForPoster}
+      >
+        Search for Poster
+      </button>
+
+      {!movieTitle && (
+        <div style={{ fontSize: "0.5em" }}>
+          To use, enter a movie title below
+        </div>
+      )}
     </div>
   );
 }
