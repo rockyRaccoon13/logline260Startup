@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import { RatingInputStarArray } from "./RatingStars";
 import "./review.css";
 
 export function ReviewList({ reviews }) {
@@ -21,15 +22,19 @@ export function Review({ review }) {
     <div className="review">
       <div className="review-data">
         <div className="review-movie-title">{review.movieTitle}</div>
-        <time className="review-watch-date" date={review.date}>
-          {review.date}
-        </time>
+
+        <RatingInputStarArray rating={review.rating} />
         <div
           className="review-username"
           onClick={() => navigate(`/profile/${review.username}`)}
         >
           @{review.username}
         </div>
+
+        <time className="review-watch-date" date={review.date}>
+          {review.date}
+        </time>
+
         <ReviewLikes review={review} />
       </div>
       <br />

@@ -4,11 +4,14 @@ import "../review/review.css";
 import "./publishReview.css";
 import { useNavigate } from "react-router-dom";
 import { MessageDialog } from "../login/messageDialog";
+import { RatingInputStarArray } from "../review/RatingStars";
 
-const maxLength = 200;
+const maxLength = 400;
 
 export function PublishReview({ username }) {
   const [displayError, setDisplayError] = React.useState(null);
+  const [rating, setRating] = React.useState(2.5);
+
   const [reviewData, setReviewData] = React.useState({
     movieTitle: "",
     date: "",
@@ -23,7 +26,7 @@ export function PublishReview({ username }) {
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
       },
-      body: JSON.stringify({ ...reviewData }),
+      body: JSON.stringify({ ...reviewData, rating }),
     });
     if (response?.status === 200) {
       navigate("/reviews");
@@ -70,9 +73,12 @@ export function PublishReview({ username }) {
                 required
                 onChange={handleChange}
               />
-              {/* TODO add Rating capability */}
-              {/* <label>Rating (coming soon):</label>
-              <RatingInputStarArray></RatingInputStarArray> */}
+              Rating
+              <label>Rating:</label>
+              <RatingInputStarArray
+                rating={rating}
+                setRating={setRating}
+              ></RatingInputStarArray>
               <label htmlFor="review-date-input">Date watched:</label>
               <input
                 id="review-date-input"
@@ -139,67 +145,3 @@ export function PublishReview({ username }) {
     )
   );
 }
-
-function RatingInputStarArray({ maxRating = 5 }) {
-  const [rating, setRating] = React.useState(Math.floor(maxRating / 2) + 0.5);
-
-  function create(n) {
-    return Array.from({ length: n }, (_, index) => index + 1);
-  }
-
-  return (
-    <div className="rating">
-      {create(maxRating).map((num) => (
-        <RatingStar
-          key={num}
-          num={num}
-          rating={rating}
-          setRating={setRating}
-          showEmptyStar={true}
-        ></RatingStar>
-      ))}
-    </div>
-  );
-}
-
-function RatingStar({ num, rating, showEmptyStar = false, setRating = null }) {
-  const handleClick = () => {
-    let newRating = num;
-    if (rating === num) {
-      newRating = num - 0.5;
-    }
-    setRating && setRating(newRating);
-  };
-  const fill = num <= rating ? 1 : rating === num - 0.5 ? 0.5 : 0;
-  return (
-    <span onClick={handleClick}>
-      {fill === 0 ? (
-        showEmptyStar && <Star fill={fill}></Star>
-      ) : (
-        <Star fill={fill}></Star>
-      )}
-    </span>
-  );
-  // return (
-  //   <span>
-  //     {Math.ceil(num) <= rating && <Star fill={1}></Star>}
-  //     {rating === num - 0.5 && <Star fill={0.5}></Star>}
-  //     {num > Math.ceil(rating) && showEmptyStar && <Star fill={0}></Star>}
-  //   </span>
-  // );
-}
-
-function Star({ fill }) {
-  let src;
-  if (fill === 0) {
-    src = "/icons8-star-outline-100.png";
-  } else if (fill === 0.5) {
-    src = "/icons8-star-half-filled-100.png";
-  } else if (fill === 1) {
-    src = "/icons8-star-filled-100.png";
-  }
-
-  return <img src={src} alt="Star" width="20vh" />;
-}
-
-<Star></Star>;
