@@ -16,7 +16,15 @@ export function PublishReview({ username }) {
     movieTitle: "",
     date: "",
     text: "",
+    posterURL: "/filmStrip.jpg",
   });
+
+  function setPosterUrl(url) {
+    setReviewData((prevData) => ({
+      ...prevData,
+      posterURL: url,
+    }));
+  }
 
   const navigate = useNavigate();
 
@@ -61,7 +69,14 @@ export function PublishReview({ username }) {
 
         <br />
         <div className="publish-review-form">
+          <PosterSearch
+            movieTitle={reviewData?.movieTitle}
+            setUpTreeValue={setPosterUrl}
+          />
           <div className="review">
+            <div className="review-poster">
+              <img src={reviewData.posterURL} alt="movie poster" width="30px" />
+            </div>
             <div className="review-data mb-3">
               <label htmlFor="review-movie-title-input">Movie:</label>
               <input
@@ -142,5 +157,54 @@ export function PublishReview({ username }) {
         />
       </main>
     )
+  );
+}
+
+function PosterSearch({ movieTitle, setUpTreeValue }) {
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [selectedPoster, setSelectedPoster] = React.useState(null);
+
+  async function searchForPoster() {
+    if (!movieTitle) {
+      return;
+    }
+    const baseUrl = "https://imdb.iamidiotareyoutoo.com";
+    const uri = encodeURI(`${baseUrl}/search?q=${movieTitle}`);
+    fetch(uri)
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchResults(data.description);
+      });
+  }
+
+  return (
+    <div className="poster-search">
+      {movieTitle && (
+        <button
+          className="btn btn-secondary"
+          type="button"
+          onClick={searchForPoster}
+        >
+          Search for Poster
+        </button>
+      )}
+      <div className="poster-results">
+        {searchResults.slice(0, 4).map((result) => (
+          <img
+            src={result["#IMG_POSTER"]}
+            alt={`POSTER: ${result["#TITLE"]}-(${result["#YEAR"]})`}
+            key={result["#IMDB_ID"]}
+            onClick={() => {
+              setSelectedPoster(result["#IMG_POSTER"]);
+              console.log(result["#IMG_POSTER"]);
+              setUpTreeValue(result["#IMG_POSTER"]);
+            }}
+            className={
+              selectedPoster === result["#IMG_POSTER"] ? "selected" : ""
+            }
+          />
+        ))}
+      </div>
+    </div>
   );
 }

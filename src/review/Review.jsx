@@ -20,25 +20,32 @@ export function Review({ review }) {
 
   return (
     <div className="review">
+      {review.posterURL && review.posterURL != "" && (
+        <div className="review-poster">
+          <img src={review.posterURL} alt="movie poster" />
+        </div>
+      )}
       <div className="review-data">
-        <div className="review-movie-title">{review.movieTitle}</div>
+        <div className="review-info">
+          <div className="review-movie-title">{review.movieTitle}</div>
 
-        <RatingInputStarArray rating={review.rating} />
-        <div
-          className="review-username"
-          onClick={() => navigate(`/profile/${review.username}`)}
-        >
-          @{review.username}
+          <RatingInputStarArray rating={review.rating} />
+          <div
+            className="review-username"
+            onClick={() => navigate(`/profile/${review.username}`)}
+          >
+            @{review.username}
+          </div>
+
+          <time className="review-watch-date" date={review.date}>
+            {review.date}
+          </time>
+
+          <ReviewLikes review={review} />
         </div>
 
-        <time className="review-watch-date" date={review.date}>
-          {review.date}
-        </time>
-
-        <ReviewLikes review={review} />
+        <div className="review-text">{review.text}</div>
       </div>
-      <br />
-      <div className="review-text">{review.text}</div>
     </div>
   );
 }

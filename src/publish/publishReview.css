@@ -19,3 +19,26 @@ label {
 .char-count {
   text-align: end;
 }
+
+.poster-search {
+  width: 100%;
+  justify-content: center;
+}
+
+.poster-results {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 1em;
+}
+
+.poster-results img {
+  border-radius: 1em;
+  width: 100%;
+  border: 10px;
+}
+
+.poster-results > img.selected {
+  border: rgb(133, 51, 160) 4px solid;
+}

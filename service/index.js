@@ -193,6 +193,7 @@ function getReviews(curUsername = null) {
       text: review.text,
       numLikes: review.likedBy.length,
       rating: review.rating,
+      posterURL: review.posterURL,
       isLikedByCurUser: curUsername
         ? review.likedBy.includes(curUsername)
         : false,
