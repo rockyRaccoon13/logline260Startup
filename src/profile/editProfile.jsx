@@ -5,6 +5,8 @@ import "../profile/profile.css";
 
 import { useNavigate, useParams } from "react-router-dom";
 
+const maxBioTextLength = 500;
+
 export function EditProfile({ authUsername }) {
   const { username: profileUsername } = useParams();
 
@@ -120,6 +122,21 @@ export function EditProfileForm({ profileUsername }) {
             value={formData?.bioText || ""}
             onChange={handleChange}
           ></textarea>
+          {formData?.bioText && (
+            <div
+              className="char-count"
+              style={{
+                color:
+                  formData?.bioText.length === maxBioTextLength
+                    ? "rgb(227, 115, 115)"
+                    : formData?.bioText.length >= maxBioTextLength * 0.9
+                    ? "rgb(211, 217, 89)"
+                    : "inherit",
+              }}
+            >
+              {`${formData?.bioText.length}/${maxBioTextLength}`}
+            </div>
+          )}
         </div>
       </div>
       <div className="button-group mt-3">
