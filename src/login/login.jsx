@@ -8,8 +8,8 @@ import { Unauthenticated } from "./unauthenticated";
 import "./login.css";
 
 export function Login({ username, authState, onAuthChange }) {
-  const [apiQuote, setApiQuote] = React.useState("random quote");
-  const [apiMovie, setApiMovie] = React.useState("random author");
+  const [apiQuote, setApiQuote] = React.useState(null);
+  const [apiMovie, setApiMovie] = React.useState(null);
 
   const [apiPoster, setApiPoster] = React.useState("/filmStrip.jpg");
 
@@ -61,8 +61,8 @@ export function Login({ username, authState, onAuthChange }) {
 
           <div id="welcome">
             <p className="description-text">
-              Logline is a web app that allows users to log, share, and read
-              short 1-2 line film reviews.
+              Logline is a web app that allows users to log, share, read, and
+              like film reviews.
             </p>
           </div>
 
@@ -81,8 +81,12 @@ export function Login({ username, authState, onAuthChange }) {
 function MovieQuoteDisplay({ quote, movie }) {
   return (
     <p id="api-quote-text">
-      <span className="movie-quote-text">"{quote}"</span>
-      <span> - </span>
+      {quote && <span className="movie-quote-text">"{quote}"</span>}
+      {quote && movie ? (
+        <span> - </span>
+      ) : (
+        <span>A Logline is a concise summary meant to pique interest</span>
+      )}
       <span className="movie-quote-movie"> {movie}</span>
     </p>
   );
