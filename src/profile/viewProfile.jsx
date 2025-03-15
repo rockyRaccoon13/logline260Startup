@@ -13,7 +13,11 @@ export function Profile({ authUsername }) {
 
   function fetchProfile(username) {
     fetch(`/api/profile/${username}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      })
       .then((profile) => {
         setProfile(profile);
       });
@@ -28,7 +32,7 @@ export function Profile({ authUsername }) {
       {profile ? (
         <ProfileFound authUsername={authUsername} profile={profile} />
       ) : (
-        <ProfileNotFound />
+        <ProfileNotFound username={profileUsername} />
       )}
     </main>
   );
@@ -110,8 +114,10 @@ function ProfileFound({ authUsername, profile }) {
   );
 }
 
-function ProfileNotFound() {
+function ProfileNotFound({ username }) {
   return (
-    <main className="container-fluid  text-center">404: User Not Found</main>
+    <main className="container-fluid  text-center">
+      404: User @{username} Not Found
+    </main>
   );
 }
