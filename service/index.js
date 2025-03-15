@@ -184,7 +184,8 @@ function createProfile(username) {
 }
 
 function getReviews(curUsername = null) {
-  return reviews.map((review) => ({
+  return reviews
+    .map((review) => ({
     id: review.id,
     username: review.username,
     movieTitle: review.movieTitle,
@@ -195,7 +196,8 @@ function getReviews(curUsername = null) {
     isLikedByCurUser: curUsername
       ? review.likedBy.includes(curUsername)
       : false,
-  }));
+    }))
+    .reverse();
 }
 
 function findUser(field, value) {
