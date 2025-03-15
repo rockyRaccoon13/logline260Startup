@@ -186,23 +186,28 @@ function createProfile(username) {
 function getReviews(curUsername = null) {
   return reviews
     .map((review) => ({
-    id: review.id,
-    username: review.username,
-    movieTitle: review.movieTitle,
-    date: review.date,
-    text: review.text,
-    numLikes: review.likedBy.length,
-    rating: review.rating,
-    isLikedByCurUser: curUsername
-      ? review.likedBy.includes(curUsername)
-      : false,
+      id: review.id,
+      username: review.username,
+      movieTitle: review.movieTitle,
+      date: review.date,
+      text: review.text,
+      numLikes: review.likedBy.length,
+      rating: review.rating,
+      isLikedByCurUser: curUsername
+        ? review.likedBy.includes(curUsername)
+        : false,
     }))
     .reverse();
 }
 
 function findUser(field, value) {
   if (!value) return null;
-  return users.find((u) => u[field] === value);
+
+  if (field === "username") {
+    return users.find((u) => u[field].toUpperCase() === value.toUpperCase());
+  } else {
+    return users.find((u) => u[field] === value);
+  }
 }
 
 function findProfile(username) {
