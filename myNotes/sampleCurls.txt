@@ -11,6 +11,7 @@ curl -X POST localhost:4000/api/auth/login -H 'Content-Type:application/json' -d
 curl -X POST localhost:4000/api/auth/login -H 'Content-Type:application/json' -d '{"username":"user2", "password":"password2"}' --cookie-jar cookie2
 
 
+
 // REVIEWS
 curl localhost:4000/api/reviews --cookie cookie1 
 curl  localhost:4000/api/reviews --cookie cookie2 
