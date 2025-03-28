@@ -41,13 +41,13 @@ function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-function updateUser(user) {
+async function updateUser(user) {
   return userCollection.updateOne({ username: user.username }, { $set: user });
 }
 
-async function getRandomQuote() {
+function getRandomQuote() {
   let randCursor = quoteCollection.aggregate([{ $sample: { size: 1 } }]);
-  let rand = await randCursor.next();
+  let rand = randCursor.next();
 
   return rand;
 }
@@ -57,9 +57,13 @@ async function addQuotes(quotes) {
 }
 
 async function addProfile(profile) {
-  await profileCollection.insertOne(user);
+  await profileCollection.insertOne(profile);
 }
-// function updateProfile(profile) {}
+
+async function updateProfile(profile) {
+  profileCollection.updateOne({ username: user.username }, { $set: profile });
+}
+
 function getProfileByUsername(username) {
   const usernameRegex = regex_iExact(username);
   return profileCollection.findOne({
@@ -67,12 +71,34 @@ function getProfileByUsername(username) {
   });
 }
 
-// function addReview(review) {}
-// function updateReview(review) {}
+async function addReview(review) {
+  await reviewCollection.insertOne(review);
+}
 
-async function main() {}
+function getUserReviews(username) {
+  const query = { username: username };
+  const options = {
+    sort: { _id: -1 },
+  };
+  const cursor = review.find(query, options);
+  return cursor.toArray();
+}
 
-main();
+function getReviews() {
+  const options = {
+    sort: { _id: -1 },
+  };
+  const cursor = review.find(options);
+  return cursor.toArray();
+}
+
+function getReviewById(reviewId) {
+  return reviewCollection.findOne({ reviewId: reviewId });
+}
+
+async function updateReview(review) {
+  reviewCollection.updateOne({ reviewId: review.reviewId }, { $set: review });
+}
 
 module.exports = {
   getUser,
@@ -82,4 +108,11 @@ module.exports = {
   addQuotes,
   getRandomQuote,
   getProfileByUsername,
+  addProfile,
+  addReview,
+  getReviews,
+  getReviewById,
+  updateReview,
+  updateProfile,
+  getUserReviews,
 };
