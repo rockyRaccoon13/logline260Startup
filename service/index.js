@@ -82,19 +82,19 @@ const verifyAuth = async (req, res, next) => {
 //***USER ENDPOINTS***
 //get a user's profile
 apiRouter.get("/profile/:username", verifyAuth, async (req, res) => {
-  const user = await findUser("username", req.params.username);
-  if (user) {
-    const profile = await findUser(req.params.username);
+  const profile = await findProfile(req.params.username);
+  if (profile) {
     res.send(profile);
   } else {
-    res.status(404).send({ msg: "User not found" });
+    res.status(404).send({ msg: "Profile not found" });
   }
 });
 
 //update a user's profile
 apiRouter.post("/profile/:username", verifyAuth, async (req, res) => {
   const user = await findUser("username", req.params.username);
-  if (user && user === req.user) {
+
+  if (user && user.token === req.user.token) {
     const profile = await findProfile(req.params.username);
     profile.data = { ...profile.data, ...req.body.data };
     await DB.updateProfile(profile);
@@ -157,7 +157,7 @@ apiRouter.post("/review", verifyAuth, async (req, res) => {
     likedBy: [],
   };
 
-  await DB.addReview;
+  await DB.addReview(review);
   res.send(review);
 });
 
@@ -215,6 +215,7 @@ function formatReviewsWithLikes(reviews, username) {
 
 async function getReviews(curUsername = null) {
   const reviews = await DB.getReviews();
+  console.log(reviews);
   return formatReviewsWithLikes(reviews, curUsername);
 }
 
@@ -229,7 +230,7 @@ async function findUser(field, value) {
 }
 
 async function findProfile(username) {
-  return DB.findProfileByUsername(username);
+  return DB.getProfileByUsername(username);
 }
 
 app.listen(port, () => {

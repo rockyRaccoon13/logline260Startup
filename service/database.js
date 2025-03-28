@@ -61,7 +61,10 @@ async function addProfile(profile) {
 }
 
 async function updateProfile(profile) {
-  profileCollection.updateOne({ username: user.username }, { $set: profile });
+  profileCollection.updateOne(
+    { username: profile.username },
+    { $set: profile }
+  );
 }
 
 function getProfileByUsername(username) {
@@ -72,6 +75,8 @@ function getProfileByUsername(username) {
 }
 
 async function addReview(review) {
+  console.log("db adding review");
+  console.log(review);
   await reviewCollection.insertOne(review);
 }
 
@@ -80,7 +85,7 @@ function getUserReviews(username) {
   const options = {
     sort: { _id: -1 },
   };
-  const cursor = review.find(query, options);
+  const cursor = reviewCollection.find(query, options);
   return cursor.toArray();
 }
 
@@ -88,7 +93,7 @@ function getReviews() {
   const options = {
     sort: { _id: -1 },
   };
-  const cursor = review.find(options);
+  const cursor = reviewCollection.find(options);
   return cursor.toArray();
 }
 
