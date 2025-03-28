@@ -80,7 +80,8 @@ export function PublishReview({ username }) {
             <div className="review-data mb-3">
               <label htmlFor="review-movie-title-input">Movie:</label>
               <div style={{ fontSize: "0.5em" }}>
-                After entering a title, you may search and select a poster above
+                After entering a title, you may search for and select a poster
+                above
               </div>
               <input
                 id="review-movie-title-input"
