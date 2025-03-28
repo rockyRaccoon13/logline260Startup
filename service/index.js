@@ -48,7 +48,7 @@ apiRouter.post("/auth/login", async (req, res) => {
     if (await bcrypt.compare(req.body.password, user.password)) {
       user.token = uuid.v4();
       await DB.updateUser(user);
-      setAuthCookie(res, user);
+      setAuthCookie(res, user.token);
       res.send({ username: user.username });
       return;
     }
@@ -224,6 +224,7 @@ async function findUser(field, value) {
   if (field === "token") {
     return await DB.getUserByToken(value);
   }
+
   return await DB.getUser(value);
 }
 
@@ -237,7 +238,7 @@ app.listen(port, () => {
 
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, token) {
-  res.cookie(authCookieName, {
+  res.cookie(authCookieName, token, {
     secure: true,
     httpOnly: true,
     sameSite: "strict",
