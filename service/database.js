@@ -97,8 +97,6 @@ function getReviewById(reviewId) {
 }
 
 async function updateReview(review) {
-  console.log("db updating review");
-  console.log(review);
   reviewCollection.updateOne({ id: review.id }, { $set: review });
 }
 
