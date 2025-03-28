@@ -30,10 +30,6 @@ async function addUser(user) {
 }
 
 function getUser(username) {
-  return userCollection.findOne({ username: username });
-}
-
-function getUserByUsername(username) {
   const usernameRegex = regex_iExact(username);
 
   return userCollection.findOne({
@@ -45,11 +41,8 @@ function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-function updateUser(user, value) {
-  return userCollection.updateOne(
-    { username: user.username },
-    { $set: { value } }
-  );
+function updateUser(user) {
+  return userCollection.updateOne({ username: user.username }, { $set: user });
 }
 
 async function getRandomQuote() {
@@ -63,16 +56,16 @@ async function addQuotes(quotes) {
   await quoteCollection.insertMany(quotes);
 }
 
-// function addProfile(profile) {
-
-// }
+async function addProfile(profile) {
+  await profileCollection.insertOne(user);
+}
 // function updateProfile(profile) {}
-// function getProfileByUsername(username) {
-//   const usernameRegex = regex_iExact(username);
-//   return profileCollection.findOne({
-//     username: { $regex: usernameRegex },
-//   });
-// }
+function getProfileByUsername(username) {
+  const usernameRegex = regex_iExact(username);
+  return profileCollection.findOne({
+    username: { $regex: usernameRegex },
+  });
+}
 
 // function addReview(review) {}
 // function updateReview(review) {}
@@ -88,4 +81,5 @@ module.exports = {
   updateUser,
   addQuotes,
   getRandomQuote,
+  getProfileByUsername,
 };
