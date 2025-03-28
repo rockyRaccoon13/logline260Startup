@@ -16,7 +16,7 @@ const regex_iExact = (variable) => {
 (async function testConnection() {
   try {
     await db.command({ ping: 1 });
-    console.log(`Connect to database`);
+    console.log(`Connected to database`);
   } catch (ex) {
     console.log(
       `Unable to connect to database with ${url} because ${ex.message}`
@@ -75,8 +75,6 @@ function getProfileByUsername(username) {
 }
 
 async function addReview(review) {
-  console.log("db adding review");
-  console.log(review);
   await reviewCollection.insertOne(review);
 }
 
@@ -90,10 +88,7 @@ function getUserReviews(username) {
 }
 
 function getReviews() {
-  const options = {
-    sort: { _id: -1 },
-  };
-  const cursor = reviewCollection.find(options);
+  const cursor = reviewCollection.find().sort({ _id: -1 });
   return cursor.toArray();
 }
 

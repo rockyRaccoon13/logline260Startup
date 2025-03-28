@@ -215,6 +215,7 @@ function formatReviewsWithLikes(reviews, username) {
 
 async function getReviews(curUsername = null) {
   const reviews = await DB.getReviews();
+  console.log("getting reviews endpoint");
   console.log(reviews);
   return formatReviewsWithLikes(reviews, curUsername);
 }
