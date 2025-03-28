@@ -93,11 +93,13 @@ function getReviews() {
 }
 
 function getReviewById(reviewId) {
-  return reviewCollection.findOne({ reviewId: reviewId });
+  return reviewCollection.findOne({ id: reviewId });
 }
 
 async function updateReview(review) {
-  reviewCollection.updateOne({ reviewId: review.reviewId }, { $set: review });
+  console.log("db updating review");
+  console.log(review);
+  reviewCollection.updateOne({ id: review.id }, { $set: review });
 }
 
 module.exports = {
