@@ -12,12 +12,15 @@ const LikeEvent = {
 };
 
 class LikeEventNotifier {
-  event;
+  event = new EventMessage("Client", LikeEvent.System, {
+    msg: "connecting to Logline Notifications.....",
+  });
   handlers = [];
 
   constructor() {
     let port = window.location.port;
-    const protocol = window.location.protocol === "https" ? "wss" : "ws";
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    console.log(" protocol: " + protocol);
     this.socket = new WebSocket(
       `${protocol}://${window.location.hostname}:${port}/ws`
     );
@@ -46,6 +49,8 @@ class LikeEventNotifier {
 
   addHandler(handler) {
     this.handlers.push(handler);
+
+    handler(this.event);
   }
 
   removeHandler(handler) {
@@ -61,4 +66,4 @@ class LikeEventNotifier {
 }
 
 const LikeNotifier = new LikeEventNotifier();
-export { LikeEvent, LikeNotifier };
+export { LikeEvent, LikeNotifier, EventMessage };

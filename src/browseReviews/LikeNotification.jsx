@@ -65,16 +65,3 @@ export function LikeNotification(props) {
     </div>
   );
 }
-
-// like: {
-//   review: {
-//     movieTitle: review.movieTitle,
-//     username: review.username,
-//     numLikes: review.likedBy.length,
-//   },
-//   time: Date.now(),
-// },
-// user: {
-//   username: likerUsername,
-//   hasLiked: userHasLiked,
-// },
