@@ -26,10 +26,15 @@
 }
 
 .notification-event-from {
-  color: rgb(235, 165, 186);
+  color: rgb(255, 249, 167);
 }
 
-.notification-event-body {
-  color: rgb(235, 165, 214);
+.subject {
+  color: rgb(247, 194, 255);
+}
+
+.movieTitle {
+  color: rgb(247, 194, 255);
+
   font-style: italic;
 }
