@@ -168,6 +168,6 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Backend listens for WebSocket connection** - back end listens for incoming requests by proxying http requests ending with /ws
 - [x] **Frontend makes WebSocket connection** - frontend makes websocket connection on browse page, where notifications are also displayed
-- [ ] **Data sent over WebSocket connection** - on any like (from any page), a broadcast is sent out to other users
+- [x] **Data sent over WebSocket connection** - on any like (from any page), a broadcast is sent out to other users
 - [x] **WebSocket data displayed** -Web socket data displayed at top of browse page as notifications
 - [x] **Application is fully functional** - Application done!!
