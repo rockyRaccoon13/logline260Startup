@@ -66,6 +66,24 @@ footer a {
   }
 }
 
+@media (max-height: 500px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1 100vh;
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    margin-bottom: 30px;
+  }
+}
+
 body {
   background-color: #577bc1;
 }
