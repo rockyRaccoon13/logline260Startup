@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { RatingInputStarArray } from "./RatingStars";
 import "./review.css";
+import { LikeNotifier, LikeEvent } from "../browseReviews/likeNotifier";
 
 export function ReviewList({ reviews }) {
   let key = 0;
@@ -66,9 +67,17 @@ function ReviewLikes({ review }) {
       body: JSON.stringify({ reviewId: review.id }),
     })
       .then((response) => response.json())
-      .then((likes) => {
-        setLikes(likes.num);
-        setIsLikedByCurUser(likes.userHasLiked);
+      .then((body) => {
+        setLikes(body.like.review.numLikes);
+        setIsLikedByCurUser(body.user.hasLiked);
+
+        if (body.user.hasLiked) {
+          LikeNotifier.broadcastEvent(
+            body.user.username,
+            LikeEvent.Liked,
+            body.like
+          );
+        }
       });
   };
 

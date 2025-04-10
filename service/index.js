@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
 const cookieParser = require("cookie-parser");
 const DB = require("./database.js");
+const { peerProxy } = require("./peerProxy.js");
 
 const app = express();
 
@@ -142,8 +143,18 @@ apiRouter.post("/review/like", verifyAuth, async (req, res) => {
 
     await DB.updateReview(review);
     res.send({
-      num: review.likedBy.length,
-      userHasLiked: userHasLiked,
+      like: {
+        review: {
+          movieTitle: review.movieTitle,
+          username: review.username,
+          numLikes: review.likedBy.length,
+        },
+        time: Date.now(),
+      },
+      user: {
+        username: likerUsername,
+        hasLiked: userHasLiked,
+      },
     });
   }
 });
@@ -232,10 +243,6 @@ async function findProfile(username) {
   return DB.getProfileByUsername(username);
 }
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, token) {
   res.cookie(authCookieName, token, {
@@ -274,3 +281,9 @@ class Profile {
     }/${date.getDate()}/${date.getFullYear()}`;
   }
 }
+
+const httpService = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+peerProxy(httpService);

@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import { Profile } from "./profile/viewProfile";
-import { BrowseReviews } from "./browseReviews/browseReviews";
+import { Browse } from "./browseReviews/Browse";
 import { EditProfile } from "./profile/editProfile";
 import { PublishReview } from "./publish/publishReview";
 import { Login } from "./login/login";
@@ -89,10 +89,7 @@ export default function App() {
           />
           <Route
             path="/reviews"
-            element={requireAuth(
-              <BrowseReviews username={username} />,
-              authState
-            )}
+            element={requireAuth(<Browse username={username} />, authState)}
           />
           <Route
             path="/profile/:username"
