@@ -40,7 +40,9 @@ export function Profile({ authUsername }) {
       ) : profile ? (
         <ProfileFound authUsername={authUsername} profile={profile} />
       ) : (
-        <ProfileNotFound username={profileUsername} />
+        <>
+          <div className="m-6"> Loading Profile...</div>
+        </>
       )}
     </main>
   );
