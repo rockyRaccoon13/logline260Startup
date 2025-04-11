@@ -49,7 +49,7 @@ export function ErrorPage({ error }) {
         type="submit"
         id="home-button"
         onClick={() => {
-          navigate("/browseReviews");
+          navigate("/reviews");
         }}
       >
         Browse Reviews
