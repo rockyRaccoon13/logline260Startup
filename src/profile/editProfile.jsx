@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./editProfile.css";
 import "../profile/profile.css";
+import { ErrorPage } from "../ErrorPage";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -9,34 +10,52 @@ const maxBioTextLength = 500;
 
 export function EditProfile({ authUsername }) {
   const { username: profileUsername } = useParams();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (authUsername !== profileUsername) {
+      setError({ status: 409, message: "Unauthorized" });
+    }
+  }, [authUsername, profileUsername]);
 
   return (
     <main>
       <h1>Editing {profileUsername}'s Profile</h1>
-      {profileUsername === authUsername ? (
+      {!!error ? (
+        <ErrorPage error={error} />
+      ) : (
         <>
           <p>Make changes to your profile below.</p>
-          <EditProfileForm profileUsername={profileUsername} />
+          <EditProfileForm
+            profileUsername={profileUsername}
+            setError={setError}
+          />
         </>
-      ) : (
-        <p>401: Unauthorized to make changes to {profileUsername}'s profile.</p>
       )}
     </main>
   );
 }
 
-export function EditProfileForm({ profileUsername }) {
+export function EditProfileForm({ profileUsername, setError }) {
   const navigate = useNavigate();
-  const [profile, setProfile] = React.useState(undefined);
+  const [profile, setProfile] = useState(undefined);
 
   const [formData, setFormData] = React.useState(undefined);
 
   function fetchProfile(username) {
     fetch(`/api/profile/${username}`)
-      .then((response) => response.json())
-      .then((profile) => {
-        setProfile(profile);
-      });
+      .then((response) =>
+        response.json().then((data) => {
+          if (response.status === 200) {
+            setProfile(data);
+          } else {
+            setError({ status: response.status, message: data.msg });
+          }
+        })
+      )
+      .catch((error) =>
+        setError({ status: 500, message: "Internal Server Error" })
+      );
   }
 
   useEffect(() => {

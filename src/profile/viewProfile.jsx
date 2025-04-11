@@ -6,21 +6,27 @@ import "./profile.css";
 import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReviewList } from "../review/Review";
+import { ErrorPage } from "../ErrorPage";
 
 export function Profile({ authUsername }) {
   const { username: profileUsername } = useParams();
   const [profile, setProfile] = React.useState(null);
+  const [error, setError] = React.useState(null);
 
   function fetchProfile(username) {
     fetch(`/api/profile/${username}`)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-      })
-      .then((profile) => {
-        setProfile(profile);
-      });
+      .then((response) =>
+        response.json().then((data) => {
+          if (response.status === 200) {
+            setProfile(data);
+          } else {
+            setError({ status: response.status, message: data.msg });
+          }
+        })
+      )
+      .catch((error) =>
+        setError({ status: 500, message: "Internal Server Error" })
+      );
   }
 
   useEffect(() => {
@@ -29,7 +35,9 @@ export function Profile({ authUsername }) {
 
   return (
     <main>
-      {profile ? (
+      {!!error ? (
+        <ErrorPage error={error} />
+      ) : profile ? (
         <ProfileFound authUsername={authUsername} profile={profile} />
       ) : (
         <ProfileNotFound username={profileUsername} />

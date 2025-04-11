@@ -41,7 +41,7 @@ export function PublishReview({ username }) {
       navigate("/reviews");
     } else {
       const body = await response.json();
-      setDisplayError(`⚠ Error: ${body.msg}`);
+      setDisplayError(`⚠ Error Publishing: ${body.msg}`);
     }
   }
 

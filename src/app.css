@@ -27,6 +27,14 @@ footer {
   color: #edc95b;
 }
 
+.important-text {
+  color: #fafe90;
+}
+
+.error-text {
+  color: #fe9090;
+}
+
 h1,
 h2 {
   color: #b7d2f3;
